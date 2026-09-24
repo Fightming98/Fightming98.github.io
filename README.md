@@ -1,7 +1,9 @@
 # 个人主页
 
+🌐 **在线访问：<https://fightming98.github.io>**
+
 纯 HTML / CSS / JavaScript 写的个人简介网站，无框架、无构建步骤、无依赖。
-推上 GitHub Pages 即可上线。
+已部署在 GitHub Pages，改完 `git push` 一分钟左右自动更新。
 
 ---
 
