@@ -81,7 +81,12 @@
                这一列会变宽，中间那列（1fr）相应变窄，不会撑破布局 -->
           <div class="hero-role">
             <span>期望方向：</span>
-            <span>AI 算法岗 ｜ AI 大模型应用开发</span>
+            <!-- 三个岗位名各自包一层 .hero-role-tag（禁止词内折行），
+                 放不下时只会在「｜」处换行，不会把「大数据岗」切成两半。
+                 「｜」写在前一项里面，不写成独立的字：否则窄屏换行时
+                 分隔符会掉到下一行开头（「｜ AI 大数据岗」），很难看。
+                 收进前一项后，它要么跟着上一行走，要么连上一项一起换行 -->
+            <span><span class="hero-role-tag">AI 算法岗 ｜</span> <span class="hero-role-tag">AI 大模型应用开发岗 ｜</span> <span class="hero-role-tag">AI 大数据岗</span></span>
             <a class="hero-role-contact" href="tel:18537398757">电话：18537398757</a>
 
             <span>现居城市：</span>

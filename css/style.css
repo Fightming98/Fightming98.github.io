@@ -451,14 +451,25 @@ img { max-width: 100%; display: block; }
 .hero-role {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 4px 16px;
+  /* 16px（不是 17px）是为「期望方向」那行留的。
+     三个岗位名连起来一行要 371px，17px 字号下中间那格只有 353px——
+     差 18px，正好把「AI 大数据岗」挤断。缩到 16px 之后只要 349px，
+     列间距再收 4px，就稳稳放得下了 */
+  gap: 4px 12px;
   align-items: baseline;   /* 联系方式字号更小，按基线对齐才不会看起来高低不齐 */
-  font-size: 1.0625rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--c-text-2);
   font-weight: 500;
   margin-bottom: 32px;
 }
+
+/* 每一个岗位名单独包一层，禁止从中间断行。
+   中间那格是 minmax(0, 1fr)，宽度不够时默认会在任意两个字之间折行，
+   于是「AI 大数据岗」就变成了「AI 大数 / 据岗」。
+   包上这层之后，放不下时只会在「｜」处换行，不会把词切开。
+   （电话和邮箱的 .hero-role-contact 早就有同样的处理） */
+.hero-role-tag { white-space: nowrap; }
 
 /* 电话和邮箱：比正文小一号、颜色更淡，不跟左边的求职信息抢注意力 */
 .hero-role-contact {
