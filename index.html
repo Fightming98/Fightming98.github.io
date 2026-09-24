@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>王明豪 - 个人主页</title>
+  <meta name="description" content="王明豪 - 大连海洋大学硕士，AI 算法与大模型应用开发方向，深耕 AI + 海洋科学交叉研究">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       图标库
+       证书占位图上那个「文件 + 印章」的小图标，全站要用 20 次。
+       SVG 定义一次，下面各处用 <use href="#i-cert"> 复用，
+       比每次复制一遍图形代码短得多，改图标也只改这一处。
+       width/height 设 0 是为了让它自己不占位置
+       ============================================================ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-cert" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="12" rx="2"/>
+      <path d="M7 8h6"/>
+      <path d="M7 11.5h10"/>
+      <circle cx="17.5" cy="16.5" r="3"/>
+      <path d="M16.3 19.1 15.8 22l1.7-1 1.7 1-.5-2.9"/>
+    </symbol>
+  </svg>
+
+
+  <!-- ============================================================
+       导航栏
+       ============================================================ -->
+  <nav class="navbar">
+    <div class="container">
+
+      <a href="#home" class="nav-brand">
+        <!-- TODO: 放一张你的正方形头像到 image/avatar.jpg -->
+        <img src="image/avatar.jpg" alt="" class="nav-logo" width="32" height="32">
+        <span>王明豪</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="active">首页</a></li>
+        <li><a href="#skills">技术栈</a></li>
+        <li><a href="#experience">经历</a></li>
+        <li><a href="#research">成果</a></li>
+        <li><a href="#honors">荣誉</a></li>
+        <li><a href="#projects">项目</a></li>
+        <li><a href="#blog">博客</a></li>
+        <li><a href="projects.html" class="nav-cta">项目详情</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       板块 1：首屏 —— 自我介绍 + 照片 + 教育经历
+       ============================================================ -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="about-split">
+
+        <!-- ---------- 左栏：自我介绍 ---------- -->
+        <div>
+          <h1 class="hero-title">王明豪</h1>
+
+          <!-- 三列网格，按顺序自动落位：标签 ｜ 内容 ｜ 联系方式。
+               电话和邮箱靠右对齐成一列，左侧文字长短不一时右边仍是直的。
+               第三列是 auto 宽度，所以加了「电话：」「邮箱：」前缀之后
+               这一列会变宽，中间那列（1fr）相应变窄，不会撑破布局 -->
+          <div class="hero-role">
+            <span>期望方向：</span>
+            <span>AI 算法岗 ｜ AI 大模型应用开发</span>
+            <a class="hero-role-contact" href="tel:18537398757">电话：18537398757</a>
+
+            <span>现居城市：</span>
+            <span>大连 / 郑州</span>
+            <a class="hero-role-contact" href="mailto:2103186926@qq.com">邮箱：2103186926@qq.com</a>
+          </div>
+
+          <div class="hero-photo-row">
+            <!-- TODO: 放一张竖版个人照到 image/photo.jpg（建议 480×600） -->
+            <img src="image/photo.jpg" alt="王明豪" class="hero-photo" width="180" height="225" decoding="async">
+
+            <div class="hero-bio">
+              <p>
+                大连海洋大学 2027 届硕士研究生，中共党员，深耕「AI + 海洋科学」交叉研究，
+                方向为海洋科学云平台数据安全与威胁检测，聚焦智慧海洋预测预警、
+                大数据处理分析与可视化等应用场景。
+              </p>
+              <p>
+                以学生一作身份发表 SCI 二区论文 1 篇、发明专利 1 项、软件著作权 6 项，
+                连续两年获全国智慧海洋人工智能与大数据应用创新大赛国家级奖项。
+              </p>
+              <p>
+                在校期间担任班长与党支部学生负责人，获华为云鲲鹏技能认证，
+                以及国家励志奖学金、学业奖学金、三好学生、优秀班干、院辩论赛一等奖
+                等 10 余项荣誉。
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">查看项目</a>
+            <a href="#contact" class="btn btn-ghost">联系我</a>
+          </div>
+        </div>
+
+        <!-- ---------- 右栏：教育经历 ---------- -->
+        <div class="hero-right">
+
+          <!-- 学历卡片的五行信息，每行独立一个标签，视觉权重依次递减：
+               时间（最淡）→ 学校（最大）→ 学院 → 专业 → 担任职务（主题色强调） -->
+          <div class="edu-card reveal">
+            <img src="image/logo-dlou.png" alt="大连海洋大学" class="edu-logo"
+                 width="48" height="48" loading="lazy">
+            <span class="edu-badge">硕士研究生</span>
+            <p class="edu-date">2024.09–2027.07</p>
+            <h3>大连海洋大学（应用海洋学研究所）</h3>
+            <h4>海洋科技与环境学院</h4>
+            <p class="edu-major">海洋信息技术（海洋云平台威胁检测方向）</p>
+          </div>
+
+          <div class="edu-card reveal">
+            <img src="image/logo-zut.png" alt="中原工学院" class="edu-logo"
+                 width="48" height="48" loading="lazy">
+            <span class="edu-badge">本科</span>
+            <p class="edu-date">2020.09–2024.07</p>
+            <h3>中原工学院</h3>
+            <!-- 学院和职务排在同一行：学院是灰的、职务是主题色，
+                 靠颜色拉开层次，不靠换行 -->
+            <div class="edu-line">
+              <h4>软件学院</h4>
+              <p class="edu-role">班长 · 党支部学生负责人</p>
+            </div>
+            <p class="edu-major">软件工程（大数据方向）<span class="edu-tag">CET4</span></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 2：技术能力
+       ============================================================ -->
+  <section class="section section--alt" id="skills">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="section-eyebrow">Skills</p>
+        <h2 class="section-title">技术能力</h2>
+        <p class="section-desc">
+          从算法研究到 AI 工程落地，覆盖大模型应用、智能体开发与大数据处理的完整链路。
+        </p>
+      </div>
+
+      <div class="skills-grid">
+
+        <!-- 每张卡片的结构：图标 → 标题 → 一句话介绍 → 关键字标签
+             图标是内联 SVG（描边式，不填充），改 color 就能换颜色 -->
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <h3>RAG 及应用</h3>
+          <p>
+            熟悉 LangChain、LangGraph 框架，掌握 Embedding、混合检索与重排等检索优化技术，
+            具备知识库构建与多轮问答链路设计经验。
+          </p>
+          <div class="tags">
+            <span class="tag">LangChain</span>
+            <span class="tag">LangGraph</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Embedding</span>
+            <span class="tag">Hybrid Search</span>
+            <span class="tag">Rerank</span>
+            <span class="tag">知识图谱增强</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="5" r="2.5"/>
+              <circle cx="5" cy="18" r="2.5"/>
+              <circle cx="19" cy="18" r="2.5"/>
+              <path d="M10.8 7.2 6.4 15.6"/>
+              <path d="M13.2 7.2 17.6 15.6"/>
+              <path d="M7.5 18h9"/>
+            </svg>
+          </div>
+          <h3>Agent 开发</h3>
+          <p>
+            熟悉 MCP、A2A 协议与 Tool Calling 机制，具备 Multi-Agent 协作
+            与任务编排开发经验。
+          </p>
+          <div class="tags">
+            <span class="tag">MCP</span>
+            <span class="tag">A2A</span>
+            <span class="tag">HITL</span>
+            <span class="tag">Tool Calling</span>
+            <span class="tag">Multi-Agent</span>
+            <span class="tag">任务编排</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="4.5" cy="12" r="2"/>
+              <circle cx="12" cy="5.5" r="2"/>
+              <circle cx="12" cy="18.5" r="2"/>
+              <circle cx="19.5" cy="12" r="2"/>
+              <path d="M6.3 11 10.3 6.7"/>
+              <path d="M6.3 13 10.3 17.3"/>
+              <path d="M13.7 6.7 17.7 11"/>
+              <path d="M13.7 17.3 17.7 13"/>
+            </svg>
+          </div>
+          <h3>AI 算法</h3>
+          <p>
+            熟悉 CNN、GNN、Transformer 等模型算法与 PyTorch 框架，
+            具备从数据预处理到模型训练调优的端到端开发经验。
+          </p>
+          <div class="tags">
+            <span class="tag">Transformer</span>
+            <span class="tag">GNN</span>
+            <span class="tag">CNN</span>
+            <span class="tag">XGBoost</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">PyTorch</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="7" rx="2"/>
+              <rect x="3" y="13" width="18" height="7" rx="2"/>
+              <path d="M7 7.5h.01"/>
+              <path d="M7 16.5h.01"/>
+            </svg>
+          </div>
+          <h3>AI 工程开发</h3>
+          <p>
+            熟悉 Python 开发，掌握 FastAPI、Docker、Linux 等技术栈，
+            具备 AI 应用开发与生产环境部署经验。
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Flask</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Redis</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Linux</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <ellipse cx="12" cy="5.5" rx="8" ry="3"/>
+              <path d="M4 5.5v13c0 1.66 3.58 3 8 3s8-1.34 8-3v-13"/>
+              <path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>
+            </svg>
+          </div>
+          <h3>大数据开发</h3>
+          <p>
+            熟悉 Hadoop、Spark 生态与 Kafka、Hive 等大数据组件，
+            具备 Spark Streaming 实时数仓项目经验。
+          </p>
+          <div class="tags">
+            <span class="tag">Hadoop</span>
+            <span class="tag">Spark</span>
+            <span class="tag">Kafka</span>
+            <span class="tag">Hive</span>
+            <span class="tag">Elasticsearch</span>
+            <span class="tag">Milvus</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 17 4 12l5-5"/>
+              <path d="M15 7l5 5-5 5"/>
+            </svg>
+          </div>
+          <h3>AI Coding</h3>
+          <p>
+            熟悉 Claude Code 架构设计，了解 Hook、Memory、Skills 等核心机制
+            与 Sub-Agent 协作流程。
+          </p>
+          <div class="tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Hook</span>
+            <span class="tag">Memory</span>
+            <span class="tag">Skills</span>
+            <span class="tag">Context Compression</span>
+            <span class="tag">Sub-Agent</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 3：实习经历
+       ============================================================ -->
+  <section class="section" id="experience">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="section-eyebrow">Experience</p>
+        <h2 class="section-title">实习经历</h2>
+        <p class="section-desc">从算法研究到 AI 工程落地，持续深耕 AI 领域。</p>
+      </div>
+
+      <div class="timeline">
+
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <span class="timeline-date">2026.03–2026.06</span>
+            <h3>移动端测试（TikTok 综合搜索）</h3>
+            <p class="timeline-org">上海思芮信息科技有限公司（东软子公司）· 字节跳动 TikTok 项目</p>
+            <ul class="timeline-list">
+              <li>负责 TikTok 移动端综合搜索模块的质量保障，覆盖搜索结果展示、搜索联想词、筛选排序等核心场景。</li>
+              <li>深度参与客户端双周跟版例行集成回归，参与需求与技术方案评审，编写并评审测试用例。</li>
+              <li>结合 Rax 代理与 Charles／任意门工具完成接口抓包、Mock 场景模拟与网络延迟测试。</li>
+              <li>提交、追踪并验证缺陷，在多轮敏捷迭代中保障搜索功能的稳定性与用户体验。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <span class="timeline-date">2025.09–2026.03</span>
+            <h3>数据处理助理</h3>
+            <p class="timeline-org">大连海通海洋环境技术发展有限公司</p>
+            <ul class="timeline-list">
+              <li>负责海上石油平台监测数据的智能分析与建模，开发实时数据处理算法，优化监测系统的计算效率。</li>
+              <li>研究并实现机器学习／深度学习模型，提升系统对海洋环境要素的预测能力。</li>
+              <li>配合硬件团队完成嵌入式算法优化，涉及传感器数据处理与边缘侧推理。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <span class="timeline-date">2024.06–2024.09</span>
+            <h3>数据分析实习生</h3>
+            <p class="timeline-org">河南攸米科技有限公司</p>
+            <ul class="timeline-list">
+              <li>参与离线数据仓库建设与维护，完成数据采集、清洗、加工等 ETL 开发工作。</li>
+              <li>参与数仓分层建设（ODS／DWD／DWS／ADS）与维度建模。</li>
+              <li>参与实时数据链路开发，负责数据接入、实时指标计算与结果落地。</li>
+              <li>参与可视化看板搭建，将业务指标沉淀为可复用报表，支持业务侧自助取数。</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 4：学术成果
+       ============================================================ -->
+  <section class="section section--alt" id="research">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="section-eyebrow">Research</p>
+        <h2 class="section-title">学术成果</h2>
+        <p class="section-desc">
+          围绕海洋科学云平台的数据安全与智能预测展开研究，成果以论文、专利与软件著作权形式固化。
+        </p>
+      </div>
+
+      <!-- 数量概览：几个数字让这一屏立刻有分量。
+           容器是 auto-fit，加一项就自动多一列，不用改 CSS -->
+      <div class="stats-row">
+        <div class="stat reveal">
+          <span class="stat-num">1</span>
+          <span class="stat-label">SCI 二区论文</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num">1</span>
+          <span class="stat-label">发明专利</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num">6</span>
+          <span class="stat-label">软件著作权</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num">2</span>
+          <span class="stat-label">国家级竞赛奖项</span>
+        </div>
+        <!-- 省市级荣誉指国家励志奖学金（河南省教育厅）与开封市疫情防控优秀志愿者 -->
+        <div class="stat reveal">
+          <span class="stat-num">2</span>
+          <span class="stat-label">省市级荣誉</span>
+        </div>
+      </div>
+
+      <div class="research-grid">
+
+        <!-- ---------- 论文 ---------- -->
+        <article class="paper-card paper-card--media reveal">
+          <div class="paper-body">
+
+            <!-- 投稿系统截图。这张是横版，不像证书墙那样需要对齐，
+                 所以 .paper-card--media .cert-img 里把 aspect-ratio 设成了
+                 auto，直接按图片原始比例排，不留黑边 -->
+            <img src="image/paper-review.jpg" width="1065" height="953" alt="IEEE Access 投稿系统页面，显示该论文当前状态为 Under Review" class="cert-img" loading="lazy">
+
+            <div>
+              <span class="badge">IEEE Access · SCI 二区</span>
+              <!-- TODO: 换成论文准确标题（从 IEEE Xplore 复制） -->
+              <h3 class="ph">基于物理先验驱动的海洋科学云平台威胁检测方法</h3>
+              <p class="paper-meta">学生一作 · 2025</p>
+              <p class="paper-meta">
+                提出「对偶原理」物理先验检测框架与 GFAG-Transformer 模型，
+                在真实生产日志数据集上 Macro-F1 达 0.93。
+              </p>
+              <!-- TODO: 换成论文的 IEEE Xplore / DOI 链接 -->
+              <a href="#" class="paper-link ph" target="_blank" rel="noopener">查看论文 →</a>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- ---------- 专利 ---------- -->
+        <article class="paper-card paper-card--media reveal">
+          <div class="paper-body">
+
+            <!-- 受理通知书，竖版，换法同上 -->
+            <img src="image/patent-notice.jpg" width="596" height="836" alt="国家知识产权局专利申请受理通知书" class="cert-img" loading="lazy">
+
+            <div>
+              <span class="badge">发明专利</span>
+              <!-- TODO: 换成专利准确名称（从专利局检索系统复制） -->
+              <h3 class="ph">海洋科学云平台异常访问检测方法及系统</h3>
+              <p class="paper-meta">学生第一发明人 · 2025</p>
+              <p class="paper-meta">
+                与 SCI 论文同源成果，将物理先验检测框架固化为可实施的发明专利。
+              </p>
+              <!-- TODO: 可以换成专利公开号，或直接删掉这行 -->
+              <p class="paper-meta ph">申请号／公开号待填</p>
+            </div>
+
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ---------- 软件著作权 ---------- -->
+      <h3 class="sub-title reveal">
+        软件著作权 <span class="sub-title-note">6 项 · 均为第一著作权人</span>
+      </h3>
+
+      <!-- 图片文件名和卡片顺序对不上（软著1 是数据中心，软著5 才是海温预测），
+           下面每张卡片都标了对应哪个文件，换图时照着改 -->
+      <div class="cert-grid cert-grid--copyright">
+
+        <article class="cert-card reveal">
+          <!-- image/copyright-sst.jpg -->
+          <img src="image/copyright-sst.jpg" width="480" height="650" alt="海洋表面温度预测系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <h4>海洋表面温度预测系统</h4>
+          <p>登记号 2026SR0305828</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <!-- image/copyright-obe.jpg -->
+          <img src="image/copyright-obe.jpg" width="480" height="646" alt="基于 OBE 理念的过程考核与达成度分析系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <h4>基于 OBE 理念的过程考核与达成度分析系统</h4>
+          <p>登记号 2025SR0343232</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <!-- image/copyright-aquaculture.jpg -->
+          <img src="image/copyright-aquaculture.jpg" width="480" height="646" alt="海水养殖实时监测预警与智能化管理系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <h4>海水养殖实时监测预警与智能化管理系统</h4>
+          <p>登记号 2025SR0515990</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <!-- image/copyright-ranch.jpg -->
+          <img src="image/copyright-ranch.jpg" width="480" height="648" alt="海洋牧场智能管理系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <h4>海洋牧场智能管理系统</h4>
+          <p>登记号 2026SR0078290</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <!-- image/copyright-datacenter.jpg -->
+          <img src="image/copyright-datacenter.jpg" width="480" height="654" alt="数据中心运营分析系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <h4>数据中心运营分析系统</h4>
+          <p>登记号 2025SR1150594</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <!-- image/copyright-bridge.jpg -->
+          <img src="image/copyright-bridge.jpg" width="480" height="650" alt="水下机器人桥墩安全检测系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <h4>水下机器人桥墩安全检测系统</h4>
+          <p>登记号 2026SR0078151</p>
+        </article>
+
+      </div>
+      <p class="research-note">
+        以上成果均可在面试时提供论文原文、专利受理通知书与软著登记证书。
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 5：个人荣誉
+       ============================================================ -->
+  <section class="section" id="honors">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="section-eyebrow">Honors</p>
+        <h2 class="section-title">个人荣誉</h2>
+        <p class="section-desc">
+          在校期间在学业、学科竞赛、社会工作与志愿服务方面获得的表彰，
+          含技能认证与荣誉称号，共 15 项。
+        </p>
+      </div>
+
+      <!-- 15 张证书，按年份从近到远排。
+           证书方向不统一（2023五好学生、2022优秀班干、2022市优秀志愿者
+           这三张是竖版），用 object-fit: contain 显示，竖版会在框里留白，
+           不会把落款和印章裁掉 -->
+      <div class="cert-grid">
+
+        <article class="cert-card reveal">
+          <img src="image/ocean-award-2025.jpg" width="573" height="410" alt="第四届全国智慧海洋大数据与人工智能应用创新大赛优秀奖证书" class="cert-img" loading="lazy">
+          <h4>第四届全国智慧海洋大数据与人工智能应用创新大赛 优秀奖</h4>
+          <p>2025 · 主要完成人</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/ocean-award-2024.jpg" width="640" height="440" alt="第三届全国智慧海洋大数据应用创新大赛优胜奖证书" class="cert-img" loading="lazy">
+          <h4>第三届全国智慧海洋大数据应用创新大赛 优胜奖</h4>
+          <p>2024</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/scholarship-2025.jpg" width="640" height="440" alt="大连海洋大学研究生学业奖学金二等奖证书" class="cert-img" loading="lazy">
+          <h4>学业二等奖学金</h4>
+          <p>2025 · 研究生</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/outstanding-student-2025.jpg" width="640" height="440" alt="大连海洋大学三好学生证书" class="cert-img" loading="lazy">
+          <h4>三好学生</h4>
+          <p>2024–2025 学年</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/national-scholarship-2023.jpg" width="640" height="440" alt="国家励志奖学金荣誉证书" class="cert-img" loading="lazy">
+          <h4>国家励志奖学金</h4>
+          <p>2022–2023 学年 · 河南省教育厅</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/five-good-student-2023.jpg" width="608" height="856" alt="中原工学院五好学生荣誉证书" class="cert-img" loading="lazy">
+          <h4>五好学生</h4>
+          <p>2022–2023 学年</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/league-cadre-2023.jpg" width="640" height="456" alt="中原工学院优秀团干部荣誉证书" class="cert-img" loading="lazy">
+          <h4>优秀团干部</h4>
+          <p>2022 年度</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/class-cadre-2022.jpg" width="604" height="854" alt="中原工学院优秀学生干部荣誉证书" class="cert-img" loading="lazy">
+          <h4>优秀学生干部</h4>
+          <p>2021–2022 学年</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/league-member-2022.jpg" width="640" height="416" alt="中原工学院优秀团员荣誉证书" class="cert-img" loading="lazy">
+          <h4>优秀团员</h4>
+          <p>2021 年度</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/volunteer-city-2022.jpg" width="640" height="854" alt="开封市返乡大学生疫情防控志愿服务证书" class="cert-img" loading="lazy">
+          <h4>开封市返乡大学生疫情防控优秀志愿者</h4>
+          <p>2022 · 共青团开封市委员会</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/volunteer-2022.jpg" width="640" height="458" alt="中原工学院疫情防控优秀志愿者荣誉证书" class="cert-img" loading="lazy">
+          <h4>疫情防控优秀志愿者</h4>
+          <p>2022 · 中原工学院</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/debate-first-2020.jpg" width="640" height="456" alt="辩论大赛一等奖荣誉证书" class="cert-img" loading="lazy">
+          <h4>「感恩资助，助我成长」辩论大赛 一等奖</h4>
+          <p>2020 · 软件学院</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/huawei-kunpeng.jpg" width="640" height="450" alt="华为云鲲鹏技能认证证书" class="cert-img" loading="lazy">
+          <h4>华为云鲲鹏技能认证</h4>
+          <p>鲲鹏软件迁移实践 · 有效期至 2027</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/ai-practice-2021.jpg" width="640" height="454" alt="全国青年人工智能社会实践「青年有为」荣誉证明" class="cert-img" loading="lazy">
+          <h4>全国青年人工智能社会实践「青年有为」称号</h4>
+          <p>2021 · 华为</p>
+        </article>
+
+        <article class="cert-card reveal">
+          <img src="image/software-contest-2021.jpg" width="640" height="458" alt="软件知识大赛团体二等奖荣誉证书" class="cert-img" loading="lazy">
+          <h4>软件知识大赛 团体二等奖</h4>
+          <p>2021 · 软件学院</p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 6：核心项目（深色）
+       ============================================================ -->
+  <section class="section section--dark" id="projects">
+    <div class="container">
+
+      <div class="section-header-row">
+        <div class="section-header">
+          <p class="section-eyebrow">Projects</p>
+          <h2 class="section-title">核心项目</h2>
+          <p class="section-desc">
+            覆盖大模型应用、海洋智能预测、大数据实时计算等方向的 AI 落地实践。
+          </p>
+        </div>
+        <a href="projects.html" class="btn btn-outline-light">查看完整项目列表 →</a>
+      </div>
+
+      <div class="projects-grid">
+
+        <article class="project-card reveal">
+          <div class="project-head">
+            <h3>法律领域本地化 RAG 智能问答系统</h3>
+            <p>
+              面向法律条文检索的本地化问答系统，独立完成从需求分析到部署上线的全流程，
+              通过结构化分块与混合检索解决条文检索语义破碎问题。
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag tag--dark">Qwen3-8B</span>
+            <span class="tag tag--dark">BGE-M3</span>
+            <span class="tag tag--dark">混合检索</span>
+            <span class="tag tag--dark">知识图谱</span>
+            <span class="tag tag--dark">FastAPI</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-head">
+            <h3>海洋云平台智能威胁检测（GFAG-Transformer）</h3>
+            <p>
+              针对合法凭证用户利用海洋物理规律实施推理攻击的安全痛点，
+              提出基于「对偶原理」的物理先验检测框架，Macro-F1 达 0.93。
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag tag--dark">Transformer</span>
+            <span class="tag tag--dark">注意力门控</span>
+            <span class="tag tag--dark">威胁检测</span>
+            <span class="tag tag--dark">PyTorch</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-head">
+            <h3>海洋温度智能预测平台</h3>
+            <p>
+              汇聚卫星遥感、浮标、站点等多源异构数据约 5200 万条，
+              构建 DIFF-STL-LSTM 复合预测模型，预测准确率提升至 98.8%。
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag tag--dark">LSTM</span>
+            <span class="tag tag--dark">ConvLSTM</span>
+            <span class="tag tag--dark">STL 分解</span>
+            <span class="tag tag--dark">Django</span>
+            <span class="tag tag--dark">Docker</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-head">
+            <h3>海水养殖实时监测预警与智能管理系统</h3>
+            <p>
+              「多源感知—数据融合—智能预测—预警决策」一体化系统，
+              已在水产养殖学实验教学示范中心完成整套软硬件部署。
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag tag--dark">LSTM-BP</span>
+            <span class="tag tag--dark">OpenCV</span>
+            <span class="tag tag--dark">Django</span>
+            <span class="tag tag--dark">WebSocket</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-head">
+            <h3>Spark Streaming 电商实时数仓与可视化平台</h3>
+            <p>
+              完成 ODS 到 DWS 层实时分流与多流关联，
+              通过 Redis 缓存状态与 Kafka Offset 手动维护实现端到端 Exactly-Once 语义。
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag tag--dark">Spark Streaming</span>
+            <span class="tag tag--dark">Kafka</span>
+            <span class="tag tag--dark">Redis</span>
+            <span class="tag tag--dark">Elasticsearch</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-head">
+            <h3>过程考核与达成度分析系统</h3>
+            <p>
+              基于 OBE 理念的本科毕业设计，实现「课程目标—知识点—试题」三级映射
+              与达成度分层加权计算，服务管理员、教师、学生三类角色，已获软件著作权。
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag tag--dark">Spring Boot</span>
+            <span class="tag tag--dark">MyBatis Plus</span>
+            <span class="tag tag--dark">Vue3</span>
+            <span class="tag tag--dark">MySQL</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 7：组织经历
+       ============================================================ -->
+  <section class="section" id="organization">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="section-eyebrow">Activities</p>
+        <h2 class="section-title">组织经历</h2>
+        <p class="section-desc">
+          本科期间担任班长与党支部学生负责人，四年间持续承担党务、班级与志愿服务的组织工作。
+        </p>
+      </div>
+
+      <div class="org-grid">
+
+        <article class="org-card reveal">
+          <img src="image/activity-1.jpg" width="760" height="570" alt="清明扫墓祭奠英烈主题党日" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>清明扫墓祭奠英烈主题党日</h3>
+            <p class="org-meta">学生党支部负责人 · 2024</p>
+            <p>
+              统筹策划并现场组织学院 100 余名师生党员、入党积极分子赴郑州市烈士陵园开展祭扫，
+              完成流程设计、人员协调、物资与安全保障全流程，活动获学院官网专题报道。
+            </p>
+          </div>
+        </article>
+
+        <article class="org-card reveal">
+          <img src="image/activity-2.jpg" width="760" height="570" alt="防范电信诈骗安全教育班会" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>防范电信诈骗安全教育班会</h3>
+            <p class="org-meta">班长（班级活动组织者）· 2024</p>
+            <p>
+              协助学院组织班级防范电信诈骗安全教育会议，负责人员通知、现场组织与材料分发，
+              覆盖本班全体同学，增强了班级同学的识诈防诈意识。
+            </p>
+          </div>
+        </article>
+
+        <article class="org-card reveal">
+          <img src="image/activity-3.jpg" width="760" height="506" alt="分党校第 62 期入党积极分子党课培训" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>分党校第 62 期入党积极分子党课培训</h3>
+            <p class="org-meta">学生党支部负责人 · 2023</p>
+            <p>
+              协助组织 97 名学员、为期六周的党课培训，承担开班、实践教学参观与结业考试的
+              学员组织与考务执行，培训全周期运转有序并获学院官网报道。
+            </p>
+          </div>
+        </article>
+
+        <!-- TODO: 这项活动的年份是推断的（原文档标注「请对照你记忆核实」），
+             如果不对，改上面第 4 张卡的 2023 即可 -->
+        <article class="org-card reveal">
+          <img src="image/activity-4.jpg" width="760" height="570" alt="学生干部培训交流会" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>学生干部培训交流会</h3>
+            <p class="org-meta">班长（班委组织对接）· 2023</p>
+            <p>
+              配合学院学生会做好学生干部培训交流会的班级层会务组织，负责本班人员组织与现场协调；
+              作为班长参会学习，会后向全班传达会议要求并落实执行。
+            </p>
+          </div>
+        </article>
+
+        <article class="org-card reveal">
+          <img src="image/activity-5.jpg" width="524" height="394" alt="第七届体育运动会" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>第七届体育运动会</h3>
+            <p class="org-meta">班长（班级组织工作）· 2023</p>
+            <p>
+              参与学院第七届体育运动会组织工作，承担检录组织与成绩登记等现场执行环节，
+              保障短跑、接力、跳高、拔河四大项目有序进行；同时组织本班学生参赛。
+            </p>
+          </div>
+        </article>
+
+        <article class="org-card reveal">
+          <img src="image/activity-6.jpg" width="564" height="424" alt="学雷锋助社区主题党日志愿服务" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>「学雷锋 助社区」主题党日志愿服务</h3>
+            <p class="org-meta">学生党支部负责人 · 2023</p>
+            <p>
+              协助组织支部赴协作路社区开展志愿服务，并担任小组长带领本组完成广告清理、
+              非机动车规范摆放等任务，活动获社区好评及学院官网报道。
+            </p>
+          </div>
+        </article>
+
+        <article class="org-card reveal">
+          <img src="image/activity-7.jpg" width="760" height="508" alt="软件知识大赛" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>软件知识大赛（班级代表队）</h3>
+            <p class="org-meta">班长（代表队组织者）· 2021</p>
+            <p>
+              组织班级代表队备战，负责组队分工、软件基础知识梳理与模拟演练，
+              率队闯入决赛并在抢答、必答、风险、互帮互助四个环节后获得大赛二等奖。
+            </p>
+          </div>
+        </article>
+
+        <article class="org-card reveal">
+          <img src="image/activity-8.jpg" width="760" height="570" alt="疫情防控志愿服务" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>疫情防控志愿服务</h3>
+            <p class="org-meta">宿舍网格长 / 防疫志愿者 · 2021</p>
+            <p>
+              统筹本楼层同学疫情期间的日常管理，负责健康打卡统计、核酸组织、
+              生活物资协调与异常上报，确保防疫信息不漏一人，获市级优秀志愿者称号。
+            </p>
+          </div>
+        </article>
+
+        <article class="org-card reveal">
+          <img src="image/activity-9.jpg" width="760" height="570" alt="朗朗读书声班级晨读活动" class="org-img" loading="lazy">
+          <div class="org-body">
+            <h3>「朗朗读书声」班级晨读活动</h3>
+            <p class="org-meta">班长（活动发起人）· 2021</p>
+            <p>
+              发起组织班级晨读活动，建立签到与缺勤记录机制，推动班级学风建设，
+              活动获学院官网专题报道，并担任活动新闻稿撰稿人。
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 8：技术博客
+       ============================================================ -->
+  <section class="section section--alt" id="blog">
+    <div class="container">
+
+      <div class="section-header-row">
+        <div class="section-header">
+          <p class="section-eyebrow">Blog</p>
+          <h2 class="section-title">技术博客</h2>
+          <p class="section-desc">
+            持续在 CSDN 记录 AI 算法与大模型应用开发的实践笔记。
+          </p>
+        </div>
+        <a href="https://blog.csdn.net/m0_59777389" target="_blank" rel="noopener" class="btn btn-primary">
+          前往 CSDN 博客 →
+        </a>
+      </div>
+
+      <!-- 想在主页直接列出文章，就去 js/blog.js 的 POSTS 数组里添加 -->
+      <div class="blog-list" id="blog-list"></div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       板块 9：联系方式
+       ============================================================ -->
+  <section class="section" id="contact">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="section-eyebrow">Contact</p>
+        <h2 class="section-title">联系方式</h2>
+        <p class="section-desc">欢迎交流 AI 算法与大模型应用开发相关的机会与合作。</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <a href="mailto:2103186926@qq.com" class="contact-card reveal">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m2 7 10 6 10-6"/>
+          </svg>
+          <span class="contact-label">邮箱</span>
+          <span class="contact-value">2103186926@qq.com</span>
+        </a>
+
+        <a href="tel:18537398757" class="contact-card reveal">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+          </svg>
+          <span class="contact-label">电话</span>
+          <span class="contact-value">185 3739 8757</span>
+        </a>
+
+        <a href="https://github.com/Fightming98" target="_blank" rel="noopener" class="contact-card reveal">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3.1-.3 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.6 16 2.5a13.4 13.4 0 0 0-7 0C6.3.6 5.1 1 5.1 1A5 5 0 0 0 5 4.8 5.4 5.4 0 0 0 3.6 8.5c0 5.5 3.3 6.7 6.4 7a3.4 3.4 0 0 0-1 2.6V22"/>
+          </svg>
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">Fightming98</span>
+        </a>
+
+        <a href="https://blog.csdn.net/m0_59777389" target="_blank" rel="noopener" class="contact-card reveal">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 4h16v16H4z"/>
+            <path d="M8 9v7M8 6.5v.01M12 16v-4a2 2 0 0 1 4 0v4"/>
+          </svg>
+          <span class="contact-label">技术博客</span>
+          <span class="contact-value">CSDN · m0_59777389</span>
+        </a>
+
+        <div class="contact-card reveal">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.9 9.9 0 0 1-4.2-.9L3 20.5l1.6-4.2A8.3 8.3 0 0 1 3.6 11.5 8.4 8.4 0 0 1 12.6 3 8.4 8.4 0 0 1 21 11.5z"/>
+          </svg>
+          <span class="contact-label">微信</span>
+          <span class="contact-value">18537398757</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       页脚
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 王明豪. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/blog.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

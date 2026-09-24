@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>项目详情 - 王明豪</title>
+  <meta name="description" content="王明豪的项目详情 - 大模型应用、海洋智能预测与大数据实时计算">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* 详情页的正文容器：比主页窄，一行别太长，读起来才舒服 */
+    .detail-wrap { max-width: 860px; }
+
+    .detail-hero { padding: 152px 0 64px; }
+
+    .detail-hero h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .9375rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .detail-block {
+      padding: 56px 0;
+      border-top: 1px solid var(--c-border-light);
+    }
+    .detail-block:first-of-type { border-top: none; }
+
+    .detail-block h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -.02em;
+      margin-bottom: 12px;
+    }
+
+    .detail-tagline {
+      font-size: 1.0625rem;
+      color: var(--c-text-3);
+      margin-bottom: 24px;
+    }
+
+    .detail-block h4 {
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      margin: 32px 0 12px;
+    }
+
+    .detail-block p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--c-text-2);
+      margin-bottom: 12px;
+    }
+
+    .detail-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .detail-block ul li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--c-text-2);
+    }
+    .detail-block ul li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: .72em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c-accent);
+    }
+
+    /* 关键指标用高亮块单独拎出来，比埋在正文里有说服力 */
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 20px 0 8px;
+    }
+    .metric {
+      padding: 16px;
+      text-align: center;
+      background: var(--c-accent-light);
+      border-radius: var(--r-md);
+    }
+    .metric b {
+      display: block;
+      font-size: 1.375rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--c-accent);
+      line-height: 1.2;
+    }
+    .metric span {
+      font-size: .8125rem;
+      color: var(--c-text-2);
+    }
+
+    .detail-figure { margin: 24px 0; }
+    .detail-figure img {
+      width: 100%;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--c-border-light);
+      background: var(--c-bg-alt);
+    }
+    .detail-figure figcaption {
+      margin-top: 10px;
+      font-size: .875rem;
+      color: var(--c-text-3);
+      text-align: center;
+    }
+
+    .detail-block .tags { margin-top: 20px; }
+
+    .detail-footer {
+      padding: 64px 0 96px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .detail-hero { padding: 112px 0 40px; }
+      .detail-block { padding: 40px 0; }
+      .detail-block h2 { font-size: 1.375rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       导航栏
+       ============================================================ -->
+  <nav class="navbar">
+    <div class="container">
+
+      <a href="index.html" class="nav-brand">
+        <img src="image/avatar.jpg" alt="" class="nav-logo" width="32" height="32">
+        <span>王明豪</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#home">首页</a></li>
+        <li><a href="index.html#skills">技术栈</a></li>
+        <li><a href="index.html#experience">经历</a></li>
+        <li><a href="index.html#research">成果</a></li>
+        <li><a href="index.html#projects">项目</a></li>
+        <li><a href="index.html#blog">博客</a></li>
+        <li><a href="projects.html" class="nav-cta active">项目详情</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       页面标题
+       ============================================================ -->
+  <header class="detail-hero">
+    <div class="container detail-wrap">
+      <a href="index.html" class="back-link">← 返回主页</a>
+      <h1>项目详情</h1>
+      <p class="section-desc">
+        六个核心项目的完整说明：技术方案、我承担的工作，以及量化后的实际产出。
+      </p>
+    </div>
+  </header>
+
+
+  <main class="container detail-wrap">
+
+    <!-- ==========================================================
+         项目 1
+         ========================================================== -->
+    <article class="detail-block reveal">
+
+      <h2>法律领域本地化 RAG 智能问答系统</h2>
+      <p class="detail-tagline">独立开发 · 从需求分析到部署上线全流程</p>
+
+      <h4>项目背景</h4>
+      <p>
+        法律条文检索对准确性要求极高，而通用 RAG 方案处理法条时有两个突出问题：
+        一是常规分块策略会把条文从「编—章—节—条」的层级结构中切断，
+        检索回来的片段语义破碎；二是用户的口语化表述与法条的专业语言之间存在语义鸿沟，
+        直接检索召回率很低。
+      </p>
+
+      <h4>我的工作</h4>
+      <ul>
+        <li><strong>大模型选型与接入：</strong>选定 Qwen3-8B 本地部署 + BGE-M3 embedding 方案，完成推理环境搭建与生成参数调优。</li>
+        <li><strong>Prompt 策略设计：</strong>设计法律条文专用结构化分块器（按编／章／节／条层级切分并注入上下文标头），根治「条文被切断」导致的检索语义破碎问题；设计术语规范化与查询改写 Prompt，解决口语表述与法条语言脱节的问题。</li>
+        <li><strong>知识库构建与检索优化：</strong>实现多查询扩展 + HyDE 分离式检索，结合 BM25 与向量的双路混合检索及 RRF 融合排序提升召回精度；引入知识图谱增强罪名关联，覆盖法条之间的隐含引用关系。</li>
+        <li><strong>自我反思机制：</strong>实现生成后自我反思校验，核验引用条文的真实性，抑制大模型幻觉。</li>
+        <li><strong>服务化与工程落地：</strong>基于 FastAPI 构建异步接口层，完成知识库管理、质量评估服务与单元测试，系统可稳定对外提供问答服务。</li>
+      </ul>
+
+      <h4>成果</h4>
+      <p>
+        系统可稳定对外提供问答服务。结构化分块 + 混合检索 + 自我反思校验三层机制叠加后，
+        回答的条文引用准确率与忠实度显著提升，有效抑制了法条编造问题。
+      </p>
+
+      <div class="tags">
+        <span class="tag">Qwen3-8B</span>
+        <span class="tag">BGE-M3</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">混合检索</span>
+        <span class="tag">RRF 融合</span>
+        <span class="tag">HyDE</span>
+        <span class="tag">知识图谱</span>
+        <span class="tag">FastAPI</span>
+      </div>
+
+    </article>
+
+
+    <!-- ==========================================================
+         项目 2
+         ========================================================== -->
+    <article class="detail-block reveal">
+
+      <h2>基于物理先验驱动的海洋云平台智能威胁检测</h2>
+      <p class="detail-tagline">核心研发 · SCI 二区论文 + 发明专利</p>
+
+      <h4>项目背景</h4>
+      <p>
+        海洋科学云平台的安全痛点很特殊：拥有合法凭证的用户可以利用海洋物理规律实施推理攻击，
+        而传统访问控制机制对这类攻击在语义上完全不可见——权限检查通过，攻击却已经发生。
+      </p>
+
+      <h4>我的工作</h4>
+      <ul>
+        <li><strong>威胁模型构建：</strong>参与构建涵盖 6 类攻击、L1–L4 四级数据密级、三维核心接口的威胁模型。</li>
+        <li><strong>提出检测框架：</strong>提出基于「对偶原理」的物理先验检测框架——海洋物理约束既是攻击者的推理通道，也是防御者的检测信号来源。</li>
+        <li><strong>特征工程：</strong>设计四组特征提取器，量化数据访问、时序行为、资源使用、I/O 不对称四类物理行为信号，构建 128 维非均匀分配的行为特征表示，将多源异构日志转化为可学习的物理语义特征空间。</li>
+        <li><strong>模型研发：</strong>研发 GFAG-Transformer 检测模型，通过分组特征注意力门控（GFAG）将「攻击类型→信号维度」的先验映射注入组间注意力权重；采用 KL 散度正则 + 余弦退火实现物理先验的渐进式内化；基于攻击者画像先验动态调制三级决策阈值，实现「放行—审计—阻断」的差异化风险治理。</li>
+        <li><strong>实验验证：</strong>在真实生产日志标注数据集（含 33% 真实攻击事件）上完成模型训练与系统评估，采用 10 随机种子与统计显著性检验；通过消融实验验证 GFAG 结构、先验正则、自适应阈值三者的独立贡献。</li>
+      </ul>
+
+      <h4>成果</h4>
+      <div class="metric-row">
+        <div class="metric"><b>0.93</b><span>Macro-F1</span></div>
+        <div class="metric"><b>0.98</b><span>高风险召回率</span></div>
+        <div class="metric"><b>0.02</b><span>低风险误报率</span></div>
+        <div class="metric"><b>+13pp</b><span>较最强基线</span></div>
+      </div>
+      <p>
+        三层决策准确率 0.87，Macro-F1 达 0.93，较最强基线 LogFormer 提升约 13 个百分点。
+        可解释性验证显示：先验正则退火归零后，模型注意力分布仍稳定对齐理论先验目标
+        （关键类别 KL 散度 0.012），证明性能增益源于物理先验的有效内化，
+        而非模型容量的堆叠。
+      </p>
+
+      <div class="tags">
+        <span class="tag">Transformer</span>
+        <span class="tag">注意力门控</span>
+        <span class="tag">KL 散度正则</span>
+        <span class="tag">威胁检测</span>
+        <span class="tag">PyTorch</span>
+      </div>
+
+    </article>
+
+
+    <!-- ==========================================================
+         项目 3
+         ========================================================== -->
+    <article class="detail-block reveal">
+
+      <h2>基于深度学习的海洋温度智能预测平台</h2>
+      <p class="detail-tagline">
+        项目负责人 · 第四届全国智慧海洋大数据与人工智能应用创新大赛（2025）获奖项目
+      </p>
+
+      <h4>项目背景</h4>
+      <p>
+        海洋温度序列具有非平稳、多尺度周期耦合的特点，直接套用通用时序模型会出现
+        预测精度低、实时性差的问题。
+      </p>
+
+      <h4>我的工作</h4>
+      <ul>
+        <li><strong>模型设计：</strong>设计差分变换（DIFF）+ STL 时序分解 + LSTM 的复合预测模型（DIFF-STL-LSTM），将序列分解为趋势／季节／残差分量，分通道独立建模后加权融合；进一步构建 DIFF-STL-ConvLSTM 实现区域海温的时空联合建模，突破单点预测局限。</li>
+        <li><strong>数据工程：</strong>汇聚卫星遥感、海洋浮标、观测站点等多源异构数据约 5200 万条，完成时空对齐、质量控制（3σ 准则／孤立森林异常检测）、特征工程与归一化，构建南海区域海表温度时空数据集。</li>
+        <li><strong>训练与评估：</strong>主导模型训练与评估全流程，通过消融实验验证各模块的有效性。</li>
+        <li><strong>平台搭建：</strong>搭建前后端分离微服务平台（Django + React + Redis + Docker），集成数据管理、模型训练、预测服务与可视化模块。</li>
+        <li><strong>项目管理：</strong>作为项目负责人统筹团队分工与进度，负责数据链路搭建、预处理与预测模型评估。</li>
+      </ul>
+
+      <h4>成果</h4>
+      <div class="metric-row">
+        <div class="metric"><b>98.8%</b><span>预测准确率</span></div>
+        <div class="metric"><b>0.388</b><span>RMSE（°C）</span></div>
+        <div class="metric"><b>5200万</b><span>多源数据条数</span></div>
+      </div>
+      <p>
+        较基础 LSTM，RMSE 由 0.414 降至 0.388°C，预测准确率提升至 98.8%（提升约 20%）；
+        区域预测模型 MAE 0.4203，准确率 98.35%。
+        成果已在海洋牧场数字化管理平台与三维地球可视化系统集成部署运行，
+        并以软件著作权「海洋表面温度预测系统」固化。
+      </p>
+
+      <div class="tags">
+        <span class="tag">LSTM</span>
+        <span class="tag">ConvLSTM</span>
+        <span class="tag">STL 分解</span>
+        <span class="tag">Django</span>
+        <span class="tag">React</span>
+        <span class="tag">Redis</span>
+        <span class="tag">Docker</span>
+      </div>
+
+    </article>
+
+
+    <!-- ==========================================================
+         项目 4
+         ========================================================== -->
+    <article class="detail-block reveal">
+
+      <h2>海水养殖实时监测预警与智能管理系统</h2>
+      <p class="detail-tagline">
+        项目负责人 · 第三届全国智慧海洋大数据与人工智能应用创新大赛（2024）获奖项目
+      </p>
+
+      <h4>项目背景</h4>
+      <p>
+        海水养殖长期存在人工经验依赖、异常发现滞后、资源粗放投喂等痛点，
+        养殖户往往在鱼群出现明显异常后才发现问题，损失已经造成。
+      </p>
+
+      <h4>我的工作</h4>
+      <ul>
+        <li><strong>系统设计：</strong>设计「多源感知—数据融合—智能预测—预警决策」一体化系统，接入水质传感器、水下摄像头、声呐、气象站、浮标与卫星遥感等多源设备数据，经清洗质控与标准化后统一入库，实现养殖环境全方位实时感知。</li>
+        <li><strong>预测模型：</strong>构建 LSTM-BP 组合水质预测模型（Keras／TensorFlow），针对单一 LSTM 收敛慢、精度不足的问题，将 LSTM 隐层输出接入 BP 网络做二次误差修正，通过反向传播联合优化权重偏置，实现水温、pH、溶解氧等多参数未来一周滚动预测与超限自动预警。</li>
+        <li><strong>视觉检测：</strong>集成基于计算机视觉的鱼类行为目标检测（OpenCV 视频流处理 + 深度学习检测模型），识别鱼类进食、活动及异常死亡事件。</li>
+        <li><strong>健康评估：</strong>结合随机森林／SVM 健康评估模型输出鱼类健康风险报告。</li>
+        <li><strong>工程实现：</strong>采用 Django + MySQL + WebSocket 架构实现监测数据实时推送与可视化看板（7 类统计视图）。</li>
+      </ul>
+
+      <h4>成果</h4>
+      <p>
+        已在大连海洋大学水产养殖学实验教学示范中心完成整套软硬件部署，
+        并在海洋养殖环境信息综合应用服务平台验证运行，
+        实现了从环境感知到预警决策的闭环。
+      </p>
+
+      <div class="tags">
+        <span class="tag">LSTM-BP</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">随机森林</span>
+        <span class="tag">SVM</span>
+        <span class="tag">Django</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">WebSocket</span>
+      </div>
+
+    </article>
+
+
+    <!-- ==========================================================
+         项目 5
+         ========================================================== -->
+    <article class="detail-block reveal">
+
+      <h2>Spark Streaming 电商实时数仓与数据可视化平台</h2>
+      <p class="detail-tagline">核心开发 · 实时流计算与可视化大屏</p>
+
+      <h4>项目背景</h4>
+      <p>
+        电商业务需要对用户行为与交易数据进行实时指标计算，
+        让运营侧能在分钟级看到转化、留存等关键指标，而不是等 T+1 的离线报表。
+      </p>
+
+      <h4>我的工作</h4>
+      <ul>
+        <li><strong>流计算开发：</strong>负责核心流计算开发，完成 ODS 到 DWS 层的实时分流、维度合并与多流关联，编写 Spark 任务与复杂统计分析 SQL，并针对热点查询做性能优化。</li>
+        <li><strong>跨批次延迟治理：</strong>基于 Redis 缓存状态解决双流 Join 的跨批次延迟问题，保障实时维度关联的完整性。</li>
+        <li><strong>一致性保障：</strong>手动维护 Kafka Offset 配合 Elasticsearch 幂等写入，实现端到端精准一次消费语义（Exactly-Once），杜绝重复计数。</li>
+        <li><strong>数据服务：</strong>用 Spring Boot 开发数据 API 供可视化大屏调用，参与指标口径梳理，理解「业务指标 → 可复用报表」的沉淀过程。</li>
+      </ul>
+
+      <h4>成果</h4>
+      <p>
+        实现端到端 Exactly-Once 消费语义，杜绝了实时指标的重复计数问题；
+        沉淀出一批口径统一、可供业务侧自助取数的报表页面。
+      </p>
+
+      <div class="tags">
+        <span class="tag">Spark Streaming</span>
+        <span class="tag">Kafka</span>
+        <span class="tag">Redis</span>
+        <span class="tag">Elasticsearch</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Hive</span>
+      </div>
+
+    </article>
+
+
+    <!-- ==========================================================
+         项目 6
+         ========================================================== -->
+    <article class="detail-block reveal">
+
+      <h2>基于 OBE 理念的过程考核与达成度分析系统</h2>
+      <p class="detail-tagline">独立开发 · 本科毕业设计 · 软件著作权 2025SR0343232</p>
+
+      <h4>项目背景</h4>
+      <p>
+        高校课程的过程性考核长期依赖手工记录与 Excel 统计。教师需要在学期末把随堂测试、
+        阶段测试、实践考核等多个环节的成绩按权重折算成课程目标达成度，工作量大且容易算错；
+        同时缺少工具支撑 OBE（成果导向教育）所要求的「课程目标—知识点—试题」三级映射与量化分析。
+      </p>
+
+      <h4>我的工作</h4>
+      <ul>
+        <li><strong>服务端整体设计与开发：</strong>基于 Spring Boot 搭建 Controller-Service-Mapper 分层架构，使用 MyBatis Plus 完成 ORM 映射与数据访问，实现课程指标设置、题库组卷（单选／多选／判断／填空／主观题）、阶段测试／实践考核／随堂测试三种考核方式的全流程。</li>
+        <li><strong>课程达成度加权计算引擎：</strong>试题关联知识点、知识点映射课程目标，按各考核环节权重分层加权计算目标达成度，并生成可视化柱状图。例如目标 2 的达成度为 (100×12% + 90×12% + 100×14%) ÷ (100×38%) = 96.8%。</li>
+        <li><strong>基于角色的动态数据隔离：</strong>从 Session 解析用户角色，教师账号仅可查询本人授课与考核数据，查询层动态注入工号过滤条件，保障数据安全。</li>
+        <li><strong>通用组件封装：</strong>封装统一分页查询组件（PageUtils／MPUtil），支持排序、区间、模糊查询复用，减少重复代码、提升开发效率。</li>
+        <li><strong>系统测试：</strong>用 JMeter 模拟 500 并发用户（学期末考核高峰场景），连续运行 30 天验证稳定性，并完成四款主流浏览器的兼容性验证。</li>
+      </ul>
+
+      <h4>成果</h4>
+      <div class="metric-row">
+        <div class="metric"><b>500</b><span>并发用户</span></div>
+        <div class="metric"><b>500ms</b><span>平均响应</span></div>
+        <div class="metric"><b>80/s</b><span>稳定吞吐</span></div>
+        <div class="metric"><b>11</b><span>核心业务表</span></div>
+      </div>
+      <p>
+        压测平均响应 500ms、峰值 800ms，稳定吞吐 80 次/秒；连续运行 30 天无服务中断
+        （MTBF &gt; 29 天）；Chrome、Firefox、Edge、360 浏览器兼容性验证通过。
+        系统覆盖用户管理、课程管理、过程化考核、达成度分析四大功能模块，
+        成果获软件著作权登记（第一著作权人，登记号 2025SR0343232），并通过本科毕业设计答辩。
+      </p>
+
+      <div class="tags">
+        <span class="tag">Spring Boot</span>
+        <span class="tag">MyBatis Plus</span>
+        <span class="tag">Vue3</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">JMeter</span>
+      </div>
+
+    </article>
+
+  </main>
+
+
+  <!-- ============================================================
+       底部返回
+       ============================================================ -->
+  <div class="detail-footer">
+    <div class="container">
+      <a href="index.html#projects" class="btn btn-primary">← 返回主页</a>
+    </div>
+  </div>
+
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 王明豪. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

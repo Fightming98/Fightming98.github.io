@@ -1,0 +1,1361 @@
+/* ============================================================
+   个人主页样式表
+   设计语言：Google / Apple 风格 —— 大量留白、大字号、克制的阴影
+   目录：
+     01. 设计变量
+     02. 基础重置
+     03. 通用布局（容器 / 板块 / 板块标题）
+     04. 按钮
+     05. 标签
+     06. 导航栏
+     07. 首屏（自我介绍 + 学历）
+     08. 技术能力
+     09. 经历时间轴
+     10. 学术成果 / 个人荣誉（证书占位图组件两个板块共用）
+     11. 核心项目（深色）
+     12. 组织经历
+     13. 博客
+     14. 联系方式
+     15. 页脚
+     16. 滚动动画
+     17. 占位符高亮 ← 填完内容后删掉这一节
+     18. 响应式
+   ============================================================ */
+
+
+/* ============================================================
+   01. 设计变量
+   想换配色？只改这里就行，全站会自动跟着变
+   ============================================================ */
+:root {
+  /* --- 颜色 --- */
+  --c-bg:            #ffffff;   /* 页面底色 */
+  --c-bg-alt:        #f7f8fa;   /* 交替板块底色（浅灰，用来分隔板块） */
+  --c-bg-dark:       #0c0c0c;   /* 深色板块底色 */
+  --c-surface:       #ffffff;   /* 卡片底色 */
+  --c-surface-hover: #f2f3f5;
+  --c-dark-surface:  #161616;   /* 深色板块里的卡片 */
+
+  --c-text:          #1a1a2e;   /* 主文字 */
+  --c-text-2:        #3c4043;   /* 次要文字 */
+  --c-text-3:        #70757a;   /* 辅助文字（日期、标签说明） */
+  --c-text-dark:     #f1f3f4;   /* 深色板块上的文字 */
+  --c-text-dark-2:   #c8cacd;
+
+  --c-accent:        #1a73e8;   /* 主题色（Google 蓝）。想换主题色只改这三行 */
+  --c-accent-hover:  #1557b0;
+  --c-accent-light:  #e8f0fe;
+
+  --c-border:        #e0e0e0;
+  --c-border-light:  #f1f3f4;
+
+  /* --- 阴影：越往后越"飘"，用在不同层级的卡片上 --- */
+  --sh-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --sh-md: 0 4px 12px rgba(0,0,0,.08);
+  --sh-lg: 0 8px 30px rgba(0,0,0,.10);
+  --sh-xl: 0 20px 60px rgba(0,0,0,.12);
+
+  /* --- 圆角 --- */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-full: 9999px;
+
+  /* --- 动效：cubic-bezier 让动画有"起步快、收尾慢"的顺滑感 --- */
+  --t: .25s cubic-bezier(.4, 0, .2, 1);
+  --t-slow: .5s cubic-bezier(.4, 0, .2, 1);
+
+  /* --- 字体 --- */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Noto Sans SC',
+          'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+
+  /* --- 内容最大宽度。想让页面更宽/更窄就改这里 --- */
+  --max-w: 1200px;
+}
+
+
+/* ============================================================
+   02. 基础重置
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;   /* 让 padding 算进宽度里，布局才好算 */
+}
+
+html {
+  scroll-behavior: smooth;      /* 点导航锚点时平滑滚动 */
+  scroll-padding-top: 88px;     /* 留出导航栏的高度，否则标题会被挡住 */
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.6;
+  overflow-x: hidden;           /* 防止横向滚动条 */
+  -webkit-font-smoothing: antialiased;  /* Mac 上字体更细腻 */
+}
+
+a {
+  color: var(--c-accent);
+  text-decoration: none;
+  transition: color var(--t);
+}
+a:hover { color: var(--c-accent-hover); }
+
+img { max-width: 100%; display: block; }
+
+::selection { background: var(--c-accent-light); color: var(--c-accent); }
+
+/* 自定义滚动条（仅 Chrome / Edge / Safari 生效，Firefox 会忽略） */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9aa0a6; }
+
+/* 内联 SVG 图标的统一描边样式 */
+.icon-svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;    /* 颜色跟随父元素的文字颜色 */
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* ============================================================
+   03. 通用布局
+   ============================================================ */
+
+/* 内容容器：居中 + 左右留白。所有内容都装在它里面 */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* 一个板块。上下 120px 的留白是"高级感"的主要来源 */
+.section { padding: 120px 0; }
+
+/* 浅灰底板块，用来和白底板块交替，形成节奏 */
+.section--alt { background: var(--c-bg-alt); }
+
+/* 深色板块 */
+.section--dark {
+  background: var(--c-bg-dark);
+  color: var(--c-text-dark);
+}
+
+/* 板块标题区 */
+.section-header { max-width: 720px; margin-bottom: 56px; }
+
+/* 有的板块标题区需要和右侧按钮并排 */
+.section-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.section-header-row .section-header { margin-bottom: 56px; }
+
+/* 标题上方的小标签（英文小字，如 SKILLS） */
+.section-eyebrow {
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-bottom: 12px;
+}
+.section--dark .section-eyebrow { color: #8ab4f8; }  /* 深色底上要用更亮的蓝 */
+
+/* 板块大标题。clamp(最小, 理想值, 最大) 让字号随屏幕自动缩放 */
+.section-title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.02em;   /* 大字号下把字距收紧一点，更精致 */
+  margin-bottom: 16px;
+  color: var(--c-text);
+}
+.section--dark .section-title { color: var(--c-text-dark); }
+
+/* 板块说明文字 */
+.section-desc {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--c-text-2);
+}
+.section--dark .section-desc { color: var(--c-text-dark-2); }
+
+/* 板块内的小标题（如"软件著作权"） */
+.sub-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin: 56px 0 24px;
+}
+
+/* 小标题后面缀一句说明，字号小一号、颜色淡一档，不跟标题抢 */
+.sub-title-note {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--c-text-3);
+  letter-spacing: 0;
+}
+
+
+/* ============================================================
+   04. 按钮
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: var(--r-full);
+  font-size: .9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--t);
+}
+
+/* 主按钮：实心蓝 */
+.btn-primary {
+  background: var(--c-accent);
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(26,115,232,.3);
+}
+.btn-primary:hover {
+  background: var(--c-accent-hover);
+  color: #fff;
+  transform: translateY(-2px);         /* 悬停时轻微上浮 */
+  box-shadow: 0 6px 18px rgba(26,115,232,.35);
+}
+
+/* 次要按钮：描边 */
+.btn-ghost {
+  background: transparent;
+  color: var(--c-text);
+  border-color: var(--c-border);
+}
+.btn-ghost:hover {
+  background: var(--c-surface-hover);
+  border-color: #c8cacd;
+  transform: translateY(-2px);
+}
+
+/* 深色底上的描边按钮 */
+.btn-outline-light {
+  background: transparent;
+  color: var(--c-text-dark);
+  border-color: rgba(255,255,255,.25);
+}
+.btn-outline-light:hover {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border-color: rgba(255,255,255,.5);
+}
+
+
+/* ============================================================
+   05. 标签（技能 / 技术的那些小圆角块）
+   ============================================================ */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.tag {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: .8125rem;
+  font-weight: 500;
+  border-radius: var(--r-full);
+  background: var(--c-accent-light);
+  color: var(--c-accent);
+  white-space: nowrap;
+}
+
+/* 深色板块里的标签 */
+.tag--dark {
+  background: rgba(138,180,248,.14);
+  color: #8ab4f8;
+}
+
+/* 论文等级标签（比 tag 更强调） */
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  border-radius: var(--r-full);
+  background: var(--c-accent);
+  color: #fff;
+}
+
+
+/* ============================================================
+   06. 导航栏
+   ============================================================ */
+.navbar {
+  position: fixed;             /* 固定在顶部，滚动时不动 */
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  /* 半透明白 + 背景模糊 = 毛玻璃效果 */
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: all var(--t);
+}
+
+/* 页面往下滚之后由 JS 加上这个类，导航栏出现边框和阴影 */
+.navbar.scrolled {
+  border-bottom-color: var(--c-border-light);
+  box-shadow: 0 1px 12px rgba(0,0,0,.05);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* 左侧品牌区 */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-text);
+  letter-spacing: -.01em;
+}
+.nav-brand:hover { color: var(--c-text); }
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-full);
+  object-fit: cover;           /* 图片裁剪填满，不变形 */
+  flex-shrink: 0;
+  background: var(--c-bg-alt);
+}
+
+/* 右侧链接列表 */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--c-text-2);
+  border-radius: var(--r-full);
+  transition: all var(--t);
+}
+.nav-links a:hover {
+  color: var(--c-text);
+  background: var(--c-surface-hover);
+}
+
+/* 当前所在板块的链接（由 JS 自动切换） */
+.nav-links a.active {
+  color: var(--c-accent);
+  background: var(--c-accent-light);
+}
+
+/* 那个蓝色按钮样的导航项 */
+.nav-links a.nav-cta {
+  background: var(--c-accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 18px;
+}
+.nav-links a.nav-cta:hover {
+  background: var(--c-accent-hover);
+  color: #fff;
+}
+
+/* 手机端汉堡按钮。桌面端隐藏 */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--c-text);
+  border-radius: 2px;
+  transition: all var(--t);
+}
+/* 打开状态：三条线变成 X */
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ============================================================
+   07. 首屏
+   ============================================================ */
+.hero {
+  padding: 152px 0 100px;      /* 上面留出导航栏的高度 */
+}
+
+/* 左右两栏：左边自适应，右边固定 400px */
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 64px;
+  align-items: start;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin-bottom: 16px;
+}
+
+/* 期望方向 / 现居城市：三列网格 —— 标签 ｜ 内容 ｜ 联系方式。
+   第三列是 auto，所以电话和邮箱会被推到最右，两行末端对齐成一条直线。
+   中间的 minmax(0, 1fr) 是关键：不加 0 的话内容过长会把列撑破，加上才能正常换行 */
+.hero-role {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 4px 16px;
+  align-items: baseline;   /* 联系方式字号更小，按基线对齐才不会看起来高低不齐 */
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--c-text-2);
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+
+/* 电话和邮箱：比正文小一号、颜色更淡，不跟左边的求职信息抢注意力 */
+.hero-role-contact {
+  font-size: .9375rem;
+  color: var(--c-text-3);
+  white-space: nowrap;     /* 电话号码和邮箱地址都不允许从中间折行 */
+  text-decoration: none;   /* 去掉链接的默认下划线 */
+  transition: color var(--t);
+}
+.hero-role-contact:hover { color: var(--c-accent); }
+
+/* 照片 + 简介 并排 */
+.hero-photo-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.hero-photo {
+  width: 180px;
+  height: 225px;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  flex-shrink: 0;
+  background: var(--c-bg-alt);
+  box-shadow: var(--sh-md);
+}
+
+.hero-bio p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--c-text-2);
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- 右栏：学历卡片 ---------- */
+.hero-right { display: flex; flex-direction: column; gap: 16px; }
+
+.edu-card {
+  position: relative;
+  padding: 24px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  transition: all var(--t);
+  overflow: hidden;
+}
+.edu-card:hover {
+  box-shadow: var(--sh-lg);
+  transform: translateY(-4px);
+  border-color: var(--c-border);
+}
+
+/* 学历层次标签 */
+.edu-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 10px;
+  font-size: .75rem;
+  font-weight: 700;
+  border-radius: var(--r-full);
+  background: var(--c-accent-light);
+  color: var(--c-accent);
+}
+
+/* 五行信息的视觉层级：靠字号 + 颜色深浅区分，不用加粗堆在一起 */
+
+/* 时间：最淡的一行，像日期戳 */
+.edu-date {
+  font-size: .8125rem;
+  color: var(--c-text-3);
+  letter-spacing: .01em;
+  margin-bottom: 6px;
+}
+
+/* 学校：卡片的主角，字号最大最粗 */
+.edu-card h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 4px;
+}
+
+/* 学院：比学校小一号、颜色更淡，形成层级 */
+.edu-card h4 {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--c-text-2);
+  margin-bottom: 10px;
+}
+
+/* 专业 */
+.edu-major {
+  font-size: .875rem;
+  line-height: 1.65;
+  color: var(--c-text-2);
+  margin-bottom: 4px;
+}
+
+/* 担任职务：用主题色强调，和上面的学历信息区分开 */
+.edu-role {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--c-accent);
+  margin-bottom: 4px;
+}
+
+/* 学院和职务排在同一行。
+   两段字号一样大，靠颜色深浅区分主次；align-items: baseline 让它们
+   坐在同一条基线上，不会因为行高不同看起来一高一低。
+   flex-wrap 是留的后路：窄屏真的挤不下时允许折行，而不是撑破卡片 */
+.edu-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  margin-bottom: 10px;     /* 接管 h4 原本的下边距，保持和专业之间的间距不变 */
+}
+
+/* 进了这个容器，两段各自的下边距都交给容器的 gap 管，留着会多出一截空白 */
+.edu-line h4,
+.edu-line .edu-role { margin-bottom: 0; }
+
+/* 专业后面挂的小标签（CET4 这类）。
+   用 inline-block 而不是 block，才能跟在专业文字后面同一行；
+   vertical-align 微调 1px，让它在视觉上和中文基线对齐 */
+.edu-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: var(--c-accent);
+  background: var(--c-accent-light);
+  border-radius: var(--r-full);
+  vertical-align: 1px;
+}
+
+/* 校徽：绝对定位到卡片右上角 */
+.edu-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;   /* 保持比例，不拉伸变形 */
+}
+
+
+/* ============================================================
+   08. 技术能力
+   ============================================================ */
+.skills-grid {
+  display: grid;
+  /* auto-fit + minmax：屏幕够宽就自动排更多列，不用写媒体查询 */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  padding: 28px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  transition: all var(--t);
+}
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-lg);
+  border-color: var(--c-accent);
+}
+
+/* 图标底板：44×44 圆角方块 + 浅色主题底。
+   里面的 SVG 用 currentColor 描边，所以改这里的 color 就能换图标颜色 */
+.skill-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  background: var(--c-accent-light);
+  color: var(--c-accent);
+  margin-bottom: 18px;
+}
+.skill-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;              /* 描边式图标：不填充 */
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;   /* 圆头 */
+  stroke-linejoin: round;  /* 圆角转折，视觉更柔和 */
+}
+
+.skill-card h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 10px;
+}
+
+/* 一句话介绍：比正文小一号、颜色更浅，让标题和标签更突出 */
+.skill-card p {
+  font-size: .875rem;
+  line-height: 1.7;
+  color: var(--c-text-2);
+  margin-bottom: 18px;
+}
+
+
+/* ============================================================
+   09. 经历时间轴
+   ============================================================ */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+
+/* 左侧那条竖线 */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--c-accent), var(--c-border-light));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 48px;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+/* 时间轴上的圆点 */
+.timeline-dot {
+  position: absolute;
+  left: -32px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--r-full);
+  background: var(--c-accent);
+  border: 3px solid var(--c-bg);
+  box-shadow: 0 0 0 2px var(--c-accent-light);
+}
+
+.timeline-date {
+  display: inline-block;
+  font-size: .8125rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--c-accent);
+  margin-bottom: 6px;
+}
+
+.timeline-body h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 4px;
+}
+
+.timeline-org {
+  font-size: .9375rem;
+  font-weight: 500;
+  color: var(--c-text-3);
+  margin-bottom: 14px;
+}
+
+.timeline-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.timeline-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--c-text-2);
+}
+/* 每条前面的小圆点 */
+.timeline-list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: .7em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--c-text-3);
+}
+
+
+/* ============================================================
+   10. 学术成果
+   ============================================================ */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.paper-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--sh-sm);
+  transition: all var(--t);
+}
+.paper-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-lg);
+}
+
+/* 论文 / 专利卡片：左证书 右文字。
+   比把证书铺在卡片顶部省一截纵向空间，两张卡片并排时高度也更整齐 */
+.paper-card--media .paper-body {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.paper-body { padding: 24px; }
+
+.paper-body .badge { margin-bottom: 12px; }
+
+.paper-body h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  margin-bottom: 8px;
+}
+
+.paper-meta {
+  font-size: .875rem;
+  color: var(--c-text-3);
+  margin-bottom: 16px;
+}
+
+.paper-link {
+  font-size: .9375rem;
+  font-weight: 600;
+}
+
+/* ---------- 成果数量概览 ---------- */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.stat {
+  padding: 24px 20px;
+  text-align: center;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+}
+
+.stat-num {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--c-accent);
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  display: block;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--c-text-3);
+}
+
+/* 补充说明文字 */
+.research-note {
+  margin-top: 20px;
+  font-size: .9375rem;
+  line-height: 1.8;
+  color: var(--c-text-3);
+}
+
+/* ---------- 证书占位图 ----------
+   每一项成果 / 荣誉都先留一个证书位，等拿到扫描件再换上真图。
+   换图时把整个 <div class="cert-ph">…</div> 删掉，换成：
+
+     <img src="image/xxx.jpg" width="640" height="860" alt="…"
+          class="cert-img" loading="lazy">
+
+   外面的卡片和文字都不用动。width/height 填图片真实像素，
+   浏览器才能提前把位置留出来，图加载完不会把下面的内容顶下去。
+
+   比例用 3:4 是因为软著证书实际是 640×860（约 1:1.34），
+   放进 3:4 的框里只裁掉一点点边 */
+.cert-ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  aspect-ratio: var(--cert-ratio, 3 / 4);
+  padding: 12px;
+  text-align: center;
+  color: var(--c-text-3);
+  background: var(--c-bg-alt);
+  border: 1.5px dashed var(--c-border);
+  border-radius: var(--r-md);
+}
+
+.cert-ph svg {
+  width: 26px;
+  height: 26px;
+  opacity: .45;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cert-ph span {
+  font-size: .75rem;
+  letter-spacing: .02em;
+  opacity: .75;
+}
+
+/* 换成真图后用这个类。
+   用 contain 不用 cover：证书四边都有落款、编号和花纹，
+   裁掉一点就可能把内容切掉。15 张荣誉证书里有 3 张是竖版，
+   放进 4:3 的框里会在左右留白——宁可留白，不裁内容 */
+.cert-img {
+  display: block;
+  width: 100%;
+  /* height: auto 这一行不能省。
+     HTML 里的 height="410" 属性会变成一条 height: 410px 的样式提示，
+     只有把它覆盖掉，下面的 aspect-ratio 才轮得到生效。
+     少了这行，图片就按 html 里写的原始像素高度排——竖版的
+     2023五好学生 会撑到 856px 高，整行卡片跟着一起被顶高，
+     而图本身在灰框里缩成小小一块（contain 只缩不放） */
+  height: auto;
+  aspect-ratio: var(--cert-ratio, 3 / 4);
+  object-fit: contain;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-md);
+}
+
+/* 论文 / 专利卡片里的凭证图。
+   证书墙要的是整齐，所以那边用固定的 4:3 / 3:4 框、contain 裁不掉内容；
+   这两张不一样：投稿截图是横版（1065×953），受理通知书是竖版（596×836），
+   各放各的比例就行，硬塞进同一个框反而两边都留大白边。
+   aspect-ratio: auto 对替换元素来说就是「用图片自己的原始比例」 */
+.paper-card--media .cert-img { aspect-ratio: auto; }
+
+/* ---------- 证书墙（软著 / 个人荣誉） ----------
+   每张卡片上方是证书图，下面是名称和年份。
+
+   --cert-ratio 决定证书框的长宽比，两个板块的证书方向不一样：
+   荣誉证书基本都是横版（4:3），软著证书是竖版 A4（3:4）。
+
+   列数写死、不用 auto-fit。容器内容宽 1136px（1200 减左右各 32 的
+   padding），auto-fit 配 minmax(180px) 只排得下 5 列，但内容分别是
+   6 项和 15 项，会排出孤零零的末行。写死列数才能让每行都是满的：
+   软著 6 项 → 6 列 1 行；荣誉 15 项 → 5 列 3 行 */
+.cert-grid {
+  --cert-ratio: 4 / 3;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 软著证书是竖版，而且正好 6 项 */
+.cert-grid--copyright {
+  --cert-ratio: 3 / 4;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+/* 1200px 以下容器不再是满宽，6 列会把卡片压到 140px 出头，
+   中文标题折行折得很难看，两个板块都降到 3 列 */
+@media (max-width: 1199px) {
+  .cert-grid,
+  .cert-grid--copyright { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  transition: all var(--t);
+}
+
+.cert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-md);
+}
+
+.cert-card .cert-ph,
+.cert-card .cert-img { margin-bottom: 14px; }
+
+.cert-card h4 {
+  font-size: .9375rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  margin-bottom: 6px;
+}
+
+.cert-card p {
+  margin-top: auto;          /* 说明文字贴着卡片底部，同一行里几张卡片的高度差不会显得乱 */
+  font-size: .8125rem;
+  line-height: 1.6;
+  color: var(--c-text-3);
+}
+
+
+/* ============================================================
+   11. 核心项目（深色板块）
+   ============================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* 让标签永远贴在卡片底部，多张卡对齐 */
+  gap: 24px;
+  padding: 28px;
+  background: var(--c-dark-surface);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--r-lg);
+  transition: all var(--t);
+}
+.project-card:hover {
+  background: #1f1f1f;
+  border-color: rgba(138,180,248,.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+}
+
+.project-head h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--c-text-dark);
+  margin-bottom: 10px;
+}
+
+.project-head p {
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--c-text-dark-2);
+}
+
+
+/* ============================================================
+   12. 组织经历
+   ============================================================ */
+.org-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.org-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--sh-sm);
+  transition: all var(--t);
+}
+.org-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-lg);
+  border-color: var(--c-border);
+}
+
+.org-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: var(--c-bg-alt);
+}
+
+.org-body { padding: 24px; }
+
+.org-body h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 6px;
+}
+
+.org-meta {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--c-accent);
+  margin-bottom: 12px;
+}
+
+.org-body p {
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--c-text-2);
+}
+
+
+/* ============================================================
+   13. 博客
+   卡片结构由 js/blog.js 生成，这里只管样式
+   ============================================================ */
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  transition: all var(--t);
+}
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-lg);
+  border-color: var(--c-accent);
+}
+
+.blog-date {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--c-text-3);
+}
+
+.blog-card h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  color: var(--c-text);
+}
+
+.blog-card p {
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--c-text-2);
+}
+
+/* 一篇文章都没有时显示的提示 */
+.blog-empty {
+  padding: 40px;
+  text-align: center;
+  font-size: .9375rem;
+  color: var(--c-text-3);
+  background: var(--c-surface);
+  border: 1px dashed var(--c-border);
+  border-radius: var(--r-lg);
+}
+
+
+/* ============================================================
+   14. 联系方式
+   ============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 26px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  color: var(--c-text);          /* 覆盖 a 标签默认的蓝色 */
+  transition: all var(--t);
+}
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-lg);
+  border-color: var(--c-accent);
+  color: var(--c-text);
+}
+
+.contact-card .icon-svg {
+  color: var(--c-accent);
+  margin-bottom: 6px;
+}
+
+.contact-label {
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--c-text-3);
+}
+
+.contact-value {
+  font-size: .9375rem;
+  font-weight: 600;
+  word-break: break-all;        /* 邮箱/网址太长时强制换行，不撑破卡片 */
+}
+
+
+/* ============================================================
+   15. 页脚
+   ============================================================ */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--c-border-light);
+  text-align: center;
+}
+.footer p {
+  font-size: .875rem;
+  color: var(--c-text-3);
+}
+
+
+/* ============================================================
+   16. 滚动动画
+   元素初始是「透明 + 下移 24px」，滚动到视野内时 JS 加上 .visible
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1),
+              transform .6s cubic-bezier(.4,0,.2,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 尊重系统的「减少动态效果」设置（前庭功能障碍用户需要） */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* ============================================================
+   17. 占位符高亮  ← 填完全部内容后，把这一节整段删掉
+   给还没填的元素加 .ph 类，会显示成黄色底纹，方便一眼扫到
+   ============================================================ */
+.ph {
+  background: rgba(255, 214, 0, .18);
+  box-shadow: inset 0 -2px 0 rgba(255, 193, 7, .55);
+  border-radius: 3px;
+}
+/* 深色板块里的占位符，用暖一点的颜色才看得清 */
+.section--dark .ph {
+  background: rgba(255, 214, 0, .12);
+  box-shadow: inset 0 -2px 0 rgba(255, 193, 7, .4);
+}
+
+
+/* ============================================================
+   18. 响应式
+   断点：1024px（平板）/ 768px（小平板、大手机）/ 480px（手机）
+   ============================================================ */
+
+/* --- 平板 --- */
+@media (max-width: 1024px) {
+  .about-split {
+    grid-template-columns: 1fr;   /* 首屏改成上下排列 */
+    gap: 48px;
+  }
+  .section { padding: 96px 0; }
+  .hero { padding: 136px 0 80px; }
+}
+
+/* --- 小平板 / 大手机：导航折叠成汉堡菜单 --- */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+
+  /* 窄屏塞不下三列，联系方式换到内容的下一行，缩进对齐到冒号后面 */
+  .hero-role { grid-template-columns: auto minmax(0, 1fr); }
+  .hero-role-contact { grid-column: 2; }
+
+  .nav-toggle { display: flex; }   /* 显示汉堡按钮 */
+
+  /* 菜单默认收起，靠 transform 从上方滑下来 */
+  .nav-links {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 20px 20px;
+    background: rgba(255,255,255,.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--c-border-light);
+    box-shadow: var(--sh-lg);
+    transform: translateY(-12px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--t);
+  }
+  /* JS 给 nav-links 加上 .open 就展开 */
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  .nav-links a { padding: 14px 16px; }
+  .nav-links a.nav-cta { justify-content: center; margin-top: 8px; }
+
+  .section { padding: 72px 0; }
+  .section-header { margin-bottom: 40px; }
+  .section-header-row { align-items: flex-start; }
+  .section-header-row .section-header { margin-bottom: 24px; }
+
+  .hero { padding: 112px 0 64px; }
+
+  /* 照片 + 简介 改成上下排列 */
+  .hero-photo-row { flex-direction: column; gap: 20px; }
+  .hero-photo { width: 140px; height: 175px; }
+
+  .timeline { padding-left: 24px; }
+  .timeline-dot { left: -24px; }
+
+  .skills-grid,
+  .research-grid,
+  .projects-grid,
+  .org-grid,
+  .blog-list,
+  .contact-grid {
+    grid-template-columns: 1fr;   /* 全部单列 */
+  }
+
+  /* 证书墙不单列——单列会让 15 张卡片拉成一条很长很长的竖线。
+     两列正好：证书缩到约 150px 宽，手机上刚好看清 */
+  .cert-grid,
+  .cert-grid--copyright { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .cert-card { padding: 12px; }
+}
+
+/* --- 手机 --- */
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.25rem; }
+  .section-title { font-size: 1.75rem; }
+  .hero-actions .btn { flex: 1; }   /* 两个按钮平分整行宽度 */
+  .org-img { height: 170px; }
+
+  /* 论文 / 专利卡片：证书挪到文字上方，否则 120px 的证书挤得正文只剩窄窄一条 */
+  .paper-card--media .paper-body { grid-template-columns: 1fr; gap: 16px; }
+  .paper-card--media .cert-ph,
+  .paper-card--media .cert-img {
+    width: 112px;
+    margin-bottom: 0;
+  }
+  .cert-card h4 { font-size: .875rem; }
+  .cert-card p { font-size: .75rem; }
+}
