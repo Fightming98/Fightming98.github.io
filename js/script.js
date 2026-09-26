@@ -1,11 +1,13 @@
 /* ============================================================
    页面交互
    ------------------------------------------------------------
-   一共四件事：
+   一共六件事：
      1. 页面下滚时，导航栏浮现边框和阴影
      2. 手机端汉堡菜单的展开 / 收起
      3. 元素滚动到视野内时淡入上浮
      4. 导航栏高亮当前所在的板块
+     5. 图片加载失败时换成灰色占位图
+     6. 点获奖作品图，全屏看大图
    ============================================================ */
 
 (function () {
@@ -193,4 +195,92 @@
     // complete 为 true 但 naturalWidth 为 0，就说明是这种情况。
     if (img.complete && img.naturalWidth === 0) swapInPlaceholder();
   });
+
+
+  /* ==========================================================
+     6. 图片放大
+     ----------------------------------------------------------
+     点带 data-zoom 的按钮（现在只有个人荣誉里的两张获奖作品图），
+     全屏看大图。放大层的 DOM 在这里现建，不用往每个页面抄一份 HTML。
+     想给别的图也加上这个功能，只要给它套个
+     <button data-zoom="大图的地址"> 就行。
+     ========================================================== */
+  const zoomBtns = document.querySelectorAll('[data-zoom]');
+
+  if (zoomBtns.length) {
+    // --- 先把放大层的骨架搭出来，塞在 </body> 前 ---
+    const box = document.createElement('div');
+    box.className = 'lightbox';
+    // role + aria-modal：告诉屏幕阅读器「这是一层弹窗，底下的内容先别看」
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', '图片放大查看');
+    box.innerHTML =
+      '<button class="lightbox-close" type="button" aria-label="关闭">' +
+        '<svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>' +
+      '</button>' +
+      '<img class="lightbox-img" alt="">';
+    document.body.appendChild(box);
+
+    const boxImg = box.querySelector('.lightbox-img');
+    const boxClose = box.querySelector('.lightbox-close');
+    let lastFocus = null;   // 记住是谁点开的，关掉之后把焦点还回去
+
+    function openLightbox(src, alt) {
+      lastFocus = document.activeElement;
+      boxImg.src = src;
+      boxImg.alt = alt;
+      box.classList.add('open');
+      document.body.classList.add('no-scroll');   // 锁住底层页面滚动
+
+      focusClose(3);
+    }
+
+    /* 把焦点移进放大层。不移的话键盘用户按 Tab 会跑到背后那些
+       看不见的链接上，等于被困住了。
+
+       为什么要重试：元素在 visibility: hidden 时是「不可聚焦」的，
+       focus() 会一声不响地失败，焦点留在原来那张图上。
+       注意 focus() 不返回值，也不报错，只能回头查 activeElement 才知道成没成。
+
+       正常情况下 class 一加，放大层立刻就是 visible，第一次就成；
+       但系统开了「减少动态效果」时，Chrome 会把所有过渡时长强制压成
+       1e-05s，还会把 transition-property 强制成 all——于是 visibility
+       被摊上一个延迟，要过一帧才真正可见，第一次就会落空。
+       所以失败就下一帧再试，最多试 tries 次，绝不会一直转下去 */
+    function focusClose(tries) {
+      boxClose.focus();
+      if (document.activeElement !== boxClose && tries > 0) {
+        requestAnimationFrame(function () { focusClose(tries - 1); });
+      }
+    }
+
+    function closeLightbox() {
+      box.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      if (lastFocus) lastFocus.focus();   // 焦点回到刚才那张图上
+    }
+
+    zoomBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        // 大图的说明文字直接复用按钮里那张小图的 alt，省得两处各写一份
+        const thumb = btn.querySelector('img');
+        openLightbox(btn.dataset.zoom, thumb ? thumb.alt : '');
+      });
+    });
+
+    boxClose.addEventListener('click', closeLightbox);
+
+    // 点图片以外的空白处也关掉。这里必须判断 e.target === box：
+    // 图片是 box 的子元素，点在图片上时 e.target 是那个 img，
+    // 不判断的话点图也会被当成点背景，一放大就自己关了
+    box.addEventListener('click', function (e) {
+      if (e.target === box) closeLightbox();
+    });
+
+    // 按 Esc 关掉
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && box.classList.contains('open')) closeLightbox();
+    });
+  }
 })();

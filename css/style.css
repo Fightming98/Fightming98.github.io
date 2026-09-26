@@ -1008,6 +1008,90 @@ img { max-width: 100%; display: block; }
   color: var(--c-text-3);
 }
 
+/* ---------- 获奖作品（大赛成果作品页） ----------
+   跟证书墙是两种东西：证书墙要的是「一眼扫完 15 张」的整齐，
+   所以每张压到 177px 宽；这两张是文字密集的作品排版页，
+   压到那么小整页字全糊，只能各占半屏，点开看大图。
+
+   两张原图比例不一样（1000×726 和 1000×806），这里统一套一个
+   4:3 的框，contain 缩放进去了事——这样两张卡片的图框一样高，
+   下面的标题才是齐的。留一点白边比参差不齐好看 */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 卡片外壳跟证书卡一模一样，只是里面换成了能点的大图 */
+.work-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  transition: all var(--t);
+}
+
+.work-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-md);
+}
+
+/* 把 <button> 的默认外观全部清掉，让它看起来只是个「能点的图框」。
+   cursor: zoom-in 是给鼠标的提示：点下去是放大，不是跳转 */
+.work-shot {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  margin-bottom: 14px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+/* 键盘 Tab 移过来时要看得见焦点。outline-offset 留条缝，
+   否则蓝色描边贴着图片边缘，看不清是哪张被选中 */
+.work-shot:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+.work-img {
+  display: block;
+  width: 100%;
+  /* 跟 .cert-img 同一个坑：html 上的 height="726" 会变成一条
+     样式提示，不覆盖掉的话 aspect-ratio 就轮不到生效 */
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-md);
+  transition: opacity var(--t);
+}
+
+/* 悬停时图稍微压暗一点，配合 zoom-in 光标，让人知道它是可以点的 */
+.work-shot:hover .work-img { opacity: .87; }
+
+.work-card h4 {
+  font-size: .9375rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  margin-bottom: 6px;
+}
+
+.work-card p {
+  margin-top: auto;
+  font-size: .8125rem;
+  line-height: 1.6;
+  color: var(--c-text-3);
+}
+
 
 /* ============================================================
    11. 核心项目（深色板块）
@@ -1270,7 +1354,100 @@ img { max-width: 100%; display: block; }
 
 
 /* ============================================================
-   18. 响应式
+   18. 图片放大（点获奖作品图看大图）
+   ------------------------------------------------------------
+   这一节只管长什么样；DOM 和交互都在 js/script.js 第 6 节里，
+   放大层是打开页面时现建的，不用往每个页面抄一份 HTML。
+
+   注意这一节必须排在「响应式」前面：里面 .lightbox 的 padding
+   在窄屏要改小，而媒体查询不加优先级，纯靠源码顺序取胜——
+   排在后面的话基础规则的 padding: 40px 会把窄屏那条盖掉。
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;                      /* 四边都贴 0 = 铺满整个视口 */
+  z-index: 2000;                 /* 要盖住导航栏（它是 1000） */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(17, 24, 39, .9);
+  /* 用 opacity + visibility 而不是 display: none：display 不参与过渡，
+     会「啪」地出现，这样才有淡入淡出。
+
+     visibility 得单独写，不能跟 opacity 一样过渡 var(--t)：
+       · 关闭时：时长 0s、延迟 var(--t)，等淡出跑完才真正 hidden，
+         否则会在淡出到一半时突然消失
+       · 打开时：延迟也是 0，立刻变成 visible。这一条很关键——
+         元素在 visibility: hidden 时是「不可聚焦」的，focus() 会静默失败。
+         如果打开也等 250ms，脚本紧接着调用的 focus() 就落空了，
+         焦点留在底下的页面上，键盘用户一按 Tab 就跑出放大层 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t), visibility 0s linear var(--t);
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--t), visibility 0s;
+}
+
+/* 大图。max-width / max-height 都卡在 100%，所以不管原图多大，
+   都会等比缩到不超出这一层为止，不会被裁掉也不会撑出滚动条 */
+.lightbox-img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  background: #fff;              /* 作品页是白底的，露出的圆角处不至于透出深色 */
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-xl);
+}
+
+/* 右上角关闭按钮。做成圆形半透明块，压在任何图上都看得见 */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;                   /* 44px 是手指能稳稳点到的下限 */
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  cursor: pointer;
+  transition: background var(--t);
+}
+
+.lightbox-close:hover { background: rgba(255, 255, 255, .3); }
+
+.lightbox-close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.lightbox-close svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* 放大层开着的时候锁住页面滚动。
+   不锁的话滚轮会带着底下那一页一起滚，关掉之后位置就跑了 */
+body.no-scroll { overflow: hidden; }
+
+
+/* ============================================================
+   19. 响应式
    断点：1024px（平板）/ 768px（小平板、大手机）/ 480px（手机）
    ============================================================ */
 
@@ -1351,6 +1528,11 @@ img { max-width: 100%; display: block; }
   .cert-grid,
   .cert-grid--copyright { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .cert-card { padding: 12px; }
+
+  /* 作品页跟证书墙相反，这里要单列：一共就两张，半屏宽（约 160px）
+     连标题都看不清，单列才能给到 350px 左右，值得多滚一屏 */
+  .work-grid { grid-template-columns: 1fr; gap: 16px; }
+  .work-card { padding: 12px; }
 }
 
 /* --- 手机 --- */
@@ -1369,4 +1551,11 @@ img { max-width: 100%; display: block; }
   }
   .cert-card h4 { font-size: .875rem; }
   .cert-card p { font-size: .75rem; }
+
+  .work-card h4 { font-size: .875rem; }
+  .work-card p { font-size: .75rem; }
+
+  /* 手机上留 40px 一圈太浪费，屏幕本来就窄 */
+  .lightbox { padding: 16px; }
+  .lightbox-close { top: 10px; right: 10px; }
 }
