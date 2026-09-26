@@ -937,6 +937,44 @@ img { max-width: 100%; display: block; }
   border-radius: var(--r-md);
 }
 
+/* ---------- 点击放大的图框（证书墙 / 获奖作品共用） ----------
+   图片本身不绑点击，外面包一层 <button>（.cert-shot / .work-shot），
+   这里把 <button> 的默认外观全部清掉，让它看起来只是个「能点的图框」。
+   cursor: zoom-in 是给鼠标的提示：点下去是放大，不是跳转。
+
+   为什么用 <button> 不用 <a>：点开是站内看大图，不是跳转，
+   button 语义才对，而且键盘 Tab 能聚焦、回车就能触发。
+   放大本身由 js/script.js 第 6 节统一处理——它找的是 [data-zoom]，
+   所以想给别的图也加上，只要套个 <button data-zoom="大图地址"> 就行 */
+.cert-shot,
+.work-shot {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  margin-bottom: 14px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+/* 键盘 Tab 移过来时要看得见焦点。outline-offset 留条缝，
+   否则蓝色描边贴着图片边缘，看不清是哪张被选中 */
+.cert-shot:focus-visible,
+.work-shot:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+/* 悬停时压暗一点，配合 zoom-in 光标，让人知道它是可以点的 */
+.cert-shot:hover .cert-img,
+.work-shot:hover .work-img { opacity: .87; }
+
+/* 间距挪到按钮上之后，图片自己不能再留一份，
+   否则 14px 会变成「图片和按钮底边之间」的空隙，卡片里多出一截 */
+.cert-shot .cert-img { margin-bottom: 0; }
+
 /* 论文 / 专利卡片里的凭证图。
    证书墙要的是整齐，所以那边用固定的 4:3 / 3:4 框、contain 裁不掉内容；
    这两张不一样：投稿截图是横版（1065×953），受理通知书是竖版（596×836），
@@ -990,8 +1028,11 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--sh-md);
 }
 
+/* 图下面的间隔。这里盯的是 .cert-shot（包着图的那层按钮）而不是
+   .cert-img：图现在都套在按钮里了，间隔要算在按钮上，
+   写 .cert-img 的话会跟上面「点击放大的图框」里的 margin-bottom: 0 打架 */
 .cert-card .cert-ph,
-.cert-card .cert-img { margin-bottom: 14px; }
+.cert-card .cert-shot { margin-bottom: 14px; }
 
 .cert-card h4 {
   font-size: .9375rem;
@@ -1039,27 +1080,8 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--sh-md);
 }
 
-/* 把 <button> 的默认外观全部清掉，让它看起来只是个「能点的图框」。
-   cursor: zoom-in 是给鼠标的提示：点下去是放大，不是跳转 */
-.work-shot {
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  margin-bottom: 14px;
-  background: none;
-  font: inherit;
-  color: inherit;
-  cursor: zoom-in;
-}
-
-/* 键盘 Tab 移过来时要看得见焦点。outline-offset 留条缝，
-   否则蓝色描边贴着图片边缘，看不清是哪张被选中 */
-.work-shot:focus-visible {
-  outline: 2px solid var(--c-accent);
-  outline-offset: 3px;
-}
-
+/* .work-shot 这个按钮壳本身不用再写样式了，
+   它和 .cert-shot 共用上面「点击放大的图框」那一组规则 */
 .work-img {
   display: block;
   width: 100%;
@@ -1073,9 +1095,6 @@ img { max-width: 100%; display: block; }
   border-radius: var(--r-md);
   transition: opacity var(--t);
 }
-
-/* 悬停时图稍微压暗一点，配合 zoom-in 光标，让人知道它是可以点的 */
-.work-shot:hover .work-img { opacity: .87; }
 
 .work-card h4 {
   font-size: .9375rem;

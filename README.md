@@ -100,7 +100,7 @@ npx --yes serve -l 8080 .
 | 实习经历（3 段） | `#experience` 板块 `.timeline-item` |
 | 论文 / 专利 / 软著 | `#research` 板块 |
 | 顶部的成果数字小窗（5 个） | `#research` 板块 `.stats-row` 里的 `.stat` |
-| 个人荣誉（15 项） | `#honors` 板块 `.cert-card` |
+| 个人荣誉（15 项） | `#honors` 板块 `.cert-card`，图片套在 `.cert-shot` 按钮里（点开看大图） |
 | 获奖作品（2 项） | `#honors` 板块的「获奖作品」小组 `.work-card` |
 | 项目卡片（6 个） | `#projects` 板块 `.project-card` |
 | 组织经历（9 项） | `#organization` 板块 `.org-card` |
