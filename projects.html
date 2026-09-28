@@ -144,10 +144,56 @@
       text-align: center;
     }
 
+    /* ---------- 项目仓库入口（每个板块标题下面那个按钮） ----------
+       为什么放在标题下面、不放板块末尾：每个板块正文有 40 多行，
+       链接埋在底部的话，扫一眼就走的人根本不知道有代码可看。
+
+       图标用的是 lucide 的 github（描边风格），跟站内其它图标是一套；
+       没用 GitHub 官方的实心标志——那是填充图形，
+       混在一堆描边图标里会很突兀。
+       新开标签页打开：外链跳过去就回不来了，
+       访客看完代码还能回来接着往下读。 */
+    .repo-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      /* flex 默认撑满一行，配 fit-content 让它缩成内容宽度，
+         不然 hover 背景会横贯整页 */
+      width: fit-content;
+      padding: 8px 16px;
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-full);
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--c-text);
+      transition: all var(--t);
+    }
+    .repo-link:hover {
+      color: var(--c-accent);
+      border-color: var(--c-accent);
+      background: var(--c-accent-light);
+      transform: translateY(-1px);
+    }
+    .repo-link svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;   /* 跟着文字变蓝，不用单独写 hover */
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    /* 仓库全名。比「查看源码」次要一档，压成灰的 */
+    .repo-link-path { color: var(--c-text-3); font-weight: 500; }
+    .repo-link:hover .repo-link-path { color: var(--c-accent); }
+
     @media (max-width: 768px) {
       .detail-hero { padding: 112px 0 40px; }
       .detail-block { padding: 40px 0; }
       .detail-block h2 { font-size: 1.375rem; }
+      /* 仓库全名太长（Fightming98/OBE-Process-Assessment-System 有 42 个字符），
+         手机上会把按钮顶出屏幕，只留「查看源码」+ 图标 */
+      .repo-link-path { display: none; }
     }
   </style>
 </head>
@@ -206,6 +252,16 @@
       <h2>法律领域本地化 RAG 智能问答系统</h2>
       <p class="detail-tagline">独立开发 · 从需求分析到部署上线全流程</p>
 
+      <a class="repo-link" href="https://github.com/Fightming98/Legal_RAG"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+          <path d="M9 18c-4.51 2-5-2-7-2"/>
+        </svg>
+        查看源码
+        <span class="repo-link-path">Fightming98/Legal_RAG</span>
+      </a>
+
       <h4>项目背景</h4>
       <p>
         法律条文检索对准确性要求极高，而通用 RAG 方案处理法条时有两个突出问题：
@@ -250,6 +306,16 @@
 
       <h2>基于物理先验驱动的海洋云平台智能威胁检测</h2>
       <p class="detail-tagline">核心研发 · SCI 二区论文 + 发明专利</p>
+
+      <a class="repo-link" href="https://github.com/Fightming98/oceanic-malware-detector"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+          <path d="M9 18c-4.51 2-5-2-7-2"/>
+        </svg>
+        查看源码
+        <span class="repo-link-path">Fightming98/oceanic-malware-detector</span>
+      </a>
 
       <h4>项目背景</h4>
       <p>
@@ -300,6 +366,16 @@
       <p class="detail-tagline">
         项目负责人 · 第四届全国智慧海洋大数据与人工智能应用创新大赛（2025）获奖项目
       </p>
+
+      <a class="repo-link" href="https://github.com/Fightming98/ocean-st-predict"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+          <path d="M9 18c-4.51 2-5-2-7-2"/>
+        </svg>
+        查看源码
+        <span class="repo-link-path">Fightming98/ocean-st-predict</span>
+      </a>
 
       <h4>项目背景</h4>
       <p>
@@ -352,6 +428,16 @@
         项目负责人 · 第三届全国智慧海洋大数据与人工智能应用创新大赛（2024）获奖项目
       </p>
 
+      <a class="repo-link" href="https://github.com/Fightming98/smart-ocean-ranch"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+          <path d="M9 18c-4.51 2-5-2-7-2"/>
+        </svg>
+        查看源码
+        <span class="repo-link-path">Fightming98/smart-ocean-ranch</span>
+      </a>
+
       <h4>项目背景</h4>
       <p>
         海水养殖长期存在人工经验依赖、异常发现滞后、资源粗放投喂等痛点，
@@ -395,6 +481,16 @@
       <h2>Spark Streaming 电商实时数仓与数据可视化平台</h2>
       <p class="detail-tagline">核心开发 · 实时流计算与可视化大屏</p>
 
+      <a class="repo-link" href="https://github.com/Fightming98/spark-realtime-1018"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+          <path d="M9 18c-4.51 2-5-2-7-2"/>
+        </svg>
+        查看源码
+        <span class="repo-link-path">Fightming98/spark-realtime-1018</span>
+      </a>
+
       <h4>项目背景</h4>
       <p>
         电商业务需要对用户行为与交易数据进行实时指标计算，
@@ -434,6 +530,16 @@
 
       <h2>基于 OBE 理念的过程考核与达成度分析系统</h2>
       <p class="detail-tagline">独立开发 · 本科毕业设计 · 软件著作权 2025SR0343232</p>
+
+      <a class="repo-link" href="https://github.com/Fightming98/OBE-Process-Assessment-System"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+          <path d="M9 18c-4.51 2-5-2-7-2"/>
+        </svg>
+        查看源码
+        <span class="repo-link-path">Fightming98/OBE-Process-Assessment-System</span>
+      </a>
 
       <h4>项目背景</h4>
       <p>

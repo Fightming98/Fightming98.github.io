@@ -108,6 +108,7 @@ npx --yes serve -l 8080 .
 | 博客文章 | `js/blog.js` 里的 `POSTS` 数组 |
 | 邮箱、电话、GitHub、微信 | `#contact` 板块 |
 | 项目详情正文 | `projects.html` |
+| 项目仓库链接 | `projects.html` 各板块标题下的 `.repo-link`（搜 `repo-link-path`） |
 | 页脚版权 | 两个文件的 `.footer` |
 
 ### 改内容时的注意事项
