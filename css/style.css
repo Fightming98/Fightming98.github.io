@@ -1255,7 +1255,21 @@ img { max-width: 100%; display: block; }
   font-size: .9375rem;
   line-height: 1.7;
   color: var(--c-text-2);
+  /* 兜底：描述是同步脚本从 CSDN 抓来再截断的，正常不超过 3 行。
+     万一 CSDN 换了摘要格式、脚本没截住，这里也不会把卡片撑变形，
+     免得一行里有一张卡片特别高、把同行的都拉长 */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
+
+/* 标签按到卡片底部。
+   .blog-card 是 flex 纵向排列，而 .blog-list 的网格会把同一行的卡片
+   拉成等高——卡片里的文字长短不一，标签要是跟着正文走，
+   同一行里就会出现「这张标签高、那张标签低」的参差。
+   margin-top: auto 吃掉剩下的空间，一行内的标签就齐平了 */
+.blog-card .tags { margin-top: auto; }
 
 /* 一篇文章都没有时显示的提示 */
 .blog-empty {

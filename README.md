@@ -16,8 +16,12 @@
 ├── css/
 │   └── style.css       全部样式，按 19 个小节组织
 ├── js/
-│   ├── blog.js         博客文章数据 ← 加文章只改这个文件
+│   ├── blog.js         博客文章数据（上半段自动生成，别手改）
 │   └── script.js       页面交互（导航 / 动画 / 滚动高亮 / 图片兜底 / 点击放大）
+├── scripts/
+│   └── sync-blog.js    从 CSDN 拉最近 6 篇文章，重写 js/blog.js
+├── .github/workflows/
+│   └── sync-blog.yml   每天定时跑一次上面那个脚本，有变化就自动提交
 ├── image/              图片放这里，见 image/README.md
 ├── .nojekyll           告诉 GitHub Pages 不要用 Jekyll 处理，加快部署
 └── .gitignore          不提交的文件
@@ -105,7 +109,8 @@ npx --yes serve -l 8080 .
 | 项目卡片（6 个） | `#projects` 板块 `.project-card` |
 | 组织经历（9 项） | `#organization` 板块 `.org-card` |
 | 校徽 | `image/logo-dlou.png`、`image/logo-zut.png` |
-| 博客文章 | `js/blog.js` 里的 `POSTS` 数组 |
+| 博客文章 | 自动从 CSDN 同步，见下面「博客文章（自动同步）」 |
+| 某篇博客的描述 | `scripts/sync-blog.js` 顶部的 `DESC_OVERRIDES` |
 | 邮箱、电话、GitHub、微信 | `#contact` 板块 |
 | 项目详情正文 | `projects.html` |
 | 项目仓库链接 | `projects.html` 各板块标题下的 `.repo-link`（搜 `repo-link-path`） |
@@ -136,24 +141,62 @@ npx --yes serve -l 8080 .
 - **删一个板块**：把整个 `<section id="xxx">...</section>` 删掉，
   记得同时把导航栏里对应的 `<li>` 删掉，否则点了会跳到页面顶部。
 
-### 加博客文章
+### 博客文章（自动同步，一般不用管）
 
-编辑 `js/blog.js` 里的 `POSTS` 数组：
+主页 `#blog` 板块展示的最近 6 篇文章，是**自动从 CSDN 同步过来的**，
+你不用手动加：
 
-```js
-const POSTS = [
-  {
-    date:  '2026.08.15',
-    title: '文章标题',
-    desc:  '一句话摘要。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/xxxxx',
-    tags:  ['大模型', 'RAG'],
-  },
-];
+```
+CSDN 接口 ──► scripts/sync-blog.js ──► js/blog.js ──► 主页卡片
+                    ▲
+        .github/workflows/sync-blog.yml
+        每天 06:17（北京时间）自动跑一次，有新文章就提交
 ```
 
-主页的博客板块会自动渲染出卡片；数组为空时显示提示文字。
-不想在主页列文章也行——板块里已经有一个「前往 CSDN 博客」的按钮。
+发完新文章**什么都不用做**，第二天早上主页就有了。
+想立刻同步，去仓库 `Actions` 页 → 左侧「同步 CSDN 博客」→ 右侧 `Run workflow`。
+
+#### 为什么不直接让网页去抓 CSDN
+
+试过了，走不通：CSDN 那个接口**不返回 CORS 头**，
+浏览器里 `fetch()` 会被跨域策略直接拦死（预检请求也没有对应响应头，
+JSONP 也不支持——加上 `callback` 参数返回的是反爬页面）。
+所以只能在「构建时」抓好、写进文件，页面本身照旧是纯静态的、零网络请求。
+
+顺带一提，这个接口还有**防盗链**：请求头里必须带
+`Referer: https://blog.csdn.net/m0_59777389`，只带浏览器 UA 会被返回 521。
+脚本里已经写好了。
+
+#### 想改某个描述
+
+CSDN 的摘要是机器从正文里自动抽的，大多数能用，
+但偶尔会抽成正文碎片（冒出 `chunk_id=36`、`=====` 这种东西），
+或者一上来就是「项目地址：GitHub - xxx」。
+
+遇到这种，打开 `scripts/sync-blog.js`，在顶部的 `DESC_OVERRIDES` 里
+按文章 id 加一条自己写的：
+
+```js
+const DESC_OVERRIDES = {
+  '163827693': 'LangChain 实战 RAG：RAG 基础知识、文档加载器与文档切分器。',
+};
+```
+
+文章 id 就是 CSDN 网址末尾那串数字。加了之后这篇就固定用你写的描述，
+不会被自动摘要覆盖。**注意它一直生效**——以后改了文章想更新描述，记得回来改这里。
+
+#### 几个约定
+
+- **`js/blog.js` 里 `SYNC:START` 到 `SYNC:END` 之间是自动生成区**，
+  手改那里的内容下次同步会被原样覆盖，要改就改 `DESC_OVERRIDES`。
+  标记外面是渲染逻辑，随你改。
+- **拉不到数据时脚本什么都不写**，直接报错退出（Actions 会标红）。
+  这样 CSDN 抽风一次，线上博客区不会变成空白。
+- 每次最多取**最近 6 篇**，按发布时间倒序，跟 CSDN 首页顺序一致。
+- 标签只取 CSDN 给的**前两个**——它自动打的标签偶尔跑偏
+  （RAG 那篇被打过「中间件」）。
+- 不想在主页列文章也行，板块里本来就有一个「前往 CSDN 博客」的按钮，
+  把 `#blog` 整个 `<section>` 删掉即可。
 
 ---
 

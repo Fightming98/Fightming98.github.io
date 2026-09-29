@@ -1,0 +1,43 @@
+name: 同步 CSDN 博客
+
+on:
+  schedule:
+    # 每天 22:17 UTC = 次日 06:17 北京时间。
+    # 特意不写整点：GitHub 的定时任务在整点最挤，经常排队延迟几十分钟。
+    # 注意 GitHub 的 cron 一律按 UTC 算，跟北京时间的换算别搞错。
+    - cron: '17 22 * * *'
+  workflow_dispatch:        # 也可以在仓库 Actions 页面手动点一下立刻跑
+
+# 要往仓库里提交，必须有写权限。默认的 GITHUB_TOKEN 权限不够
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'    # 脚本用了 fetch 和 AbortSignal.timeout，需要 Node 18+
+
+      # 脚本拉不到 CSDN 时会以退出码 1 结束，这一步就会标红，
+      # 并且不会动 js/blog.js —— 失败时线上内容原样保留，不会变空。
+      # Actions 页面出现红叉就是这个意思：该去检查同步是不是挂了。
+      - name: 拉取 CSDN 最近文章
+        run: node scripts/sync-blog.js
+
+      # 没有新文章时不产生空提交。
+      # 每天一次、每次都提交的话，仓库历史一年会多出 365 条无意义记录
+      - name: 有变化就提交
+        run: |
+          if [ -z "$(git status --porcelain js/blog.js)" ]; then
+            echo "最近文章没有变化，跳过提交"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/blog.js
+          git commit -m "自动同步 CSDN 博客文章"
+          git push
