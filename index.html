@@ -442,16 +442,17 @@
             <!-- 投稿系统截图。这张是横版，不像证书墙那样需要对齐，
                  所以 .paper-card--media .cert-img 里把 aspect-ratio 设成了
                  auto，直接按图片原始比例排，不留黑边 -->
-            <img src="image/paper-review.jpg" width="1065" height="953" alt="IEEE Access 投稿系统页面，显示该论文当前状态为 Under Review" class="cert-img" loading="lazy">
+            <img src="image/paper-review.jpg" width="1038" height="808" alt="IEEE Access 投稿系统页面，显示该论文状态为 Accepted（已接受）" class="cert-img" loading="lazy">
 
             <div>
-              <span class="badge">IEEE Access · SCI 二区</span>
+              <span class="badge">IEEE Access · SCI 二区</span><span class="badge badge--status">已接受</span>
               <!-- TODO: 换成论文准确标题（从 IEEE Xplore 复制） -->
               <h3 class="ph">基于物理先验驱动的海洋科学云平台威胁检测方法</h3>
               <p class="paper-meta">学生一作 · 2025</p>
               <p class="paper-meta">
-                提出「对偶原理」物理先验检测框架与 GFAG-Transformer 模型，
-                在真实生产日志数据集上 Macro-F1 达 0.93。
+                构建 6 类推理攻击威胁模型，提出 GFAG-Transformer：以分组特征注意力门控注入
+                「攻击类型→四维行为信号」物理先验，KL 正则 + 余弦退火实现先验内化。
+                真实生产日志上 Macro-F1 0.933（较 LogFormer +13.2pp），未知攻击开放集 AUROC 0.961。
               </p>
               <!-- TODO: 换成论文的 IEEE Xplore / DOI 链接 -->
               <a href="#" class="paper-link ph" target="_blank" rel="noopener">查看论文 →</a>
@@ -468,12 +469,12 @@
             <img src="image/patent-notice.jpg" width="596" height="836" alt="国家知识产权局专利申请受理通知书" class="cert-img" loading="lazy">
 
             <div>
-              <span class="badge">发明专利</span>
-              <!-- TODO: 换成专利准确名称（从专利局检索系统复制） -->
-              <h3 class="ph">海洋科学云平台异常访问检测方法及系统</h3>
+              <span class="badge">发明专利</span><span class="badge badge--status">已公开</span>
+              <h3>一种物理先验驱动的海洋科学云平台威胁检测方法及系统</h3>
               <p class="paper-meta">学生第一发明人 · 2025</p>
               <p class="paper-meta">
-                与 SCI 论文同源成果，将物理先验检测框架固化为可实施的发明专利。
+                属海洋数据安全、物理信息机器学习与日志异常检测交叉领域，
+                将物理先验检测框架固化为可实施的方法及系统；与 SCI 论文同源成果。
               </p>
               <!-- TODO: 可以换成专利公开号，或直接删掉这行 -->
               <p class="paper-meta ph">申请号／公开号待填</p>
