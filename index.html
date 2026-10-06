@@ -96,7 +96,11 @@
 
           <div class="hero-photo-row">
             <!-- TODO: 放一张竖版个人照到 image/photo.jpg（建议 480×600） -->
-            <img src="image/photo.jpg" alt="王明豪" class="hero-photo" width="180" height="225" decoding="async">
+            <!-- zoom-shot--fit：这张待在一行 flex 里，按钮要缩成图片宽度，
+                 不能像别处那样 width: 100% 把整行撑开 -->
+            <button class="zoom-shot zoom-shot--fit" type="button" data-zoom="image/photo.jpg">
+              <img src="image/photo.jpg" alt="王明豪" class="hero-photo" width="180" height="225" decoding="async">
+            </button>
 
             <div class="hero-bio">
               <p>
@@ -129,8 +133,10 @@
           <!-- 学历卡片的五行信息，每行独立一个标签，视觉权重依次递减：
                时间（最淡）→ 学校（最大）→ 学院 → 专业 → 担任职务（主题色强调） -->
           <div class="edu-card reveal">
-            <img src="image/logo-dlou.png" alt="大连海洋大学" class="edu-logo"
-                 width="48" height="48" loading="lazy">
+            <button class="zoom-shot zoom-shot--logo" type="button" data-zoom="image/logo-dlou.png">
+              <img src="image/logo-dlou.png" alt="大连海洋大学" class="edu-logo"
+                   width="48" height="48" loading="lazy">
+            </button>
             <span class="edu-badge">硕士研究生</span>
             <p class="edu-date">2024.09–2027.07</p>
             <h3>大连海洋大学（应用海洋学研究所）</h3>
@@ -139,8 +145,10 @@
           </div>
 
           <div class="edu-card reveal">
-            <img src="image/logo-zut.png" alt="中原工学院" class="edu-logo"
-                 width="48" height="48" loading="lazy">
+            <button class="zoom-shot zoom-shot--logo" type="button" data-zoom="image/logo-zut.png">
+              <img src="image/logo-zut.png" alt="中原工学院" class="edu-logo"
+                   width="48" height="48" loading="lazy">
+            </button>
             <span class="edu-badge">本科</span>
             <p class="edu-date">2020.09–2024.07</p>
             <h3>中原工学院</h3>
@@ -442,7 +450,9 @@
             <!-- 投稿系统截图。这张是横版，不像证书墙那样需要对齐，
                  所以 .paper-card--media .cert-img 里把 aspect-ratio 设成了
                  auto，直接按图片原始比例排，不留黑边 -->
-            <img src="image/paper-review.jpg" width="1038" height="808" alt="IEEE Access 投稿系统页面，显示该论文状态为 Accepted（已接受）" class="cert-img" loading="lazy">
+            <button class="zoom-shot" type="button" data-zoom="image/paper-review.jpg">
+              <img src="image/paper-review.jpg" width="1038" height="808" alt="IEEE Access 投稿系统页面，显示该论文状态为 Accepted（已接受）" class="cert-img" loading="lazy">
+            </button>
 
             <div>
               <span class="badge">IEEE Access · SCI 二区</span><span class="badge badge--status">已接受</span>
@@ -465,7 +475,9 @@
           <div class="paper-body">
 
             <!-- 受理通知书，竖版，换法同上 -->
-            <img src="image/patent-notice.jpg" width="596" height="836" alt="国家知识产权局专利申请受理通知书" class="cert-img" loading="lazy">
+            <button class="zoom-shot" type="button" data-zoom="image/patent-notice.jpg">
+              <img src="image/patent-notice.jpg" width="596" height="836" alt="国家知识产权局专利申请受理通知书" class="cert-img" loading="lazy">
+            </button>
 
             <div>
               <span class="badge">发明专利</span><span class="badge badge--status">已公开</span>
@@ -495,42 +507,54 @@
 
         <article class="cert-card reveal">
           <!-- image/copyright-sst.jpg -->
-          <img src="image/copyright-sst.jpg" width="480" height="650" alt="海洋表面温度预测系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <button class="cert-shot" type="button" data-zoom="image/copyright-sst.jpg">
+            <img src="image/copyright-sst.jpg" width="480" height="650" alt="海洋表面温度预测系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          </button>
           <h4>海洋表面温度预测系统</h4>
           <p>登记号 2026SR0305828</p>
         </article>
 
         <article class="cert-card reveal">
           <!-- image/copyright-obe.jpg -->
-          <img src="image/copyright-obe.jpg" width="480" height="646" alt="基于 OBE 理念的过程考核与达成度分析系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <button class="cert-shot" type="button" data-zoom="image/copyright-obe.jpg">
+            <img src="image/copyright-obe.jpg" width="480" height="646" alt="基于 OBE 理念的过程考核与达成度分析系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          </button>
           <h4>基于 OBE 理念的过程考核与达成度分析系统</h4>
           <p>登记号 2025SR0343232</p>
         </article>
 
         <article class="cert-card reveal">
           <!-- image/copyright-aquaculture.jpg -->
-          <img src="image/copyright-aquaculture.jpg" width="480" height="646" alt="海水养殖实时监测预警与智能化管理系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <button class="cert-shot" type="button" data-zoom="image/copyright-aquaculture.jpg">
+            <img src="image/copyright-aquaculture.jpg" width="480" height="646" alt="海水养殖实时监测预警与智能化管理系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          </button>
           <h4>海水养殖实时监测预警与智能化管理系统</h4>
           <p>登记号 2025SR0515990</p>
         </article>
 
         <article class="cert-card reveal">
           <!-- image/copyright-ranch.jpg -->
-          <img src="image/copyright-ranch.jpg" width="480" height="648" alt="海洋牧场智能管理系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <button class="cert-shot" type="button" data-zoom="image/copyright-ranch.jpg">
+            <img src="image/copyright-ranch.jpg" width="480" height="648" alt="海洋牧场智能管理系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          </button>
           <h4>海洋牧场智能管理系统</h4>
           <p>登记号 2026SR0078290</p>
         </article>
 
         <article class="cert-card reveal">
           <!-- image/copyright-datacenter.jpg -->
-          <img src="image/copyright-datacenter.jpg" width="480" height="654" alt="数据中心运营分析系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <button class="cert-shot" type="button" data-zoom="image/copyright-datacenter.jpg">
+            <img src="image/copyright-datacenter.jpg" width="480" height="654" alt="数据中心运营分析系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          </button>
           <h4>数据中心运营分析系统</h4>
           <p>登记号 2025SR1150594</p>
         </article>
 
         <article class="cert-card reveal">
           <!-- image/copyright-bridge.jpg -->
-          <img src="image/copyright-bridge.jpg" width="480" height="650" alt="水下机器人桥墩安全检测系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          <button class="cert-shot" type="button" data-zoom="image/copyright-bridge.jpg">
+            <img src="image/copyright-bridge.jpg" width="480" height="650" alt="水下机器人桥墩安全检测系统 计算机软件著作权登记证书" class="cert-img" loading="lazy">
+          </button>
           <h4>水下机器人桥墩安全检测系统</h4>
           <p>登记号 2026SR0078151</p>
         </article>
@@ -868,7 +892,9 @@
       <div class="org-grid">
 
         <article class="org-card reveal">
-          <img src="image/activity-1.jpg" width="760" height="570" alt="清明扫墓祭奠英烈主题党日" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-1.jpg">
+            <img src="image/activity-1.jpg" width="760" height="570" alt="清明扫墓祭奠英烈主题党日" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>清明扫墓祭奠英烈主题党日</h3>
             <p class="org-meta">学生党支部负责人 · 2024</p>
@@ -880,7 +906,9 @@
         </article>
 
         <article class="org-card reveal">
-          <img src="image/activity-2.jpg" width="760" height="570" alt="防范电信诈骗安全教育班会" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-2.jpg">
+            <img src="image/activity-2.jpg" width="760" height="570" alt="防范电信诈骗安全教育班会" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>防范电信诈骗安全教育班会</h3>
             <p class="org-meta">班长（班级活动组织者）· 2024</p>
@@ -892,7 +920,9 @@
         </article>
 
         <article class="org-card reveal">
-          <img src="image/activity-3.jpg" width="760" height="506" alt="分党校第 62 期入党积极分子党课培训" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-3.jpg">
+            <img src="image/activity-3.jpg" width="760" height="506" alt="分党校第 62 期入党积极分子党课培训" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>分党校第 62 期入党积极分子党课培训</h3>
             <p class="org-meta">学生党支部负责人 · 2023</p>
@@ -906,7 +936,9 @@
         <!-- TODO: 这项活动的年份是推断的（原文档标注「请对照你记忆核实」），
              如果不对，改上面第 4 张卡的 2023 即可 -->
         <article class="org-card reveal">
-          <img src="image/activity-4.jpg" width="760" height="570" alt="学生干部培训交流会" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-4.jpg">
+            <img src="image/activity-4.jpg" width="760" height="570" alt="学生干部培训交流会" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>学生干部培训交流会</h3>
             <p class="org-meta">班长（班委组织对接）· 2023</p>
@@ -918,7 +950,9 @@
         </article>
 
         <article class="org-card reveal">
-          <img src="image/activity-5.jpg" width="524" height="394" alt="第七届体育运动会" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-5.jpg">
+            <img src="image/activity-5.jpg" width="524" height="394" alt="第七届体育运动会" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>第七届体育运动会</h3>
             <p class="org-meta">班长（班级组织工作）· 2023</p>
@@ -930,7 +964,9 @@
         </article>
 
         <article class="org-card reveal">
-          <img src="image/activity-6.jpg" width="564" height="424" alt="学雷锋助社区主题党日志愿服务" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-6.jpg">
+            <img src="image/activity-6.jpg" width="564" height="424" alt="学雷锋助社区主题党日志愿服务" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>「学雷锋 助社区」主题党日志愿服务</h3>
             <p class="org-meta">学生党支部负责人 · 2023</p>
@@ -942,7 +978,9 @@
         </article>
 
         <article class="org-card reveal">
-          <img src="image/activity-7.jpg" width="760" height="508" alt="软件知识大赛" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-7.jpg">
+            <img src="image/activity-7.jpg" width="760" height="508" alt="软件知识大赛" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>软件知识大赛（班级代表队）</h3>
             <p class="org-meta">班长（代表队组织者）· 2021</p>
@@ -954,7 +992,9 @@
         </article>
 
         <article class="org-card reveal">
-          <img src="image/activity-8.jpg" width="760" height="570" alt="疫情防控志愿服务" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-8.jpg">
+            <img src="image/activity-8.jpg" width="760" height="570" alt="疫情防控志愿服务" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>疫情防控志愿服务</h3>
             <p class="org-meta">宿舍网格长 / 防疫志愿者 · 2021</p>
@@ -966,7 +1006,9 @@
         </article>
 
         <article class="org-card reveal">
-          <img src="image/activity-9.jpg" width="760" height="570" alt="朗朗读书声班级晨读活动" class="org-img" loading="lazy">
+          <button class="zoom-shot" type="button" data-zoom="image/activity-9.jpg">
+            <img src="image/activity-9.jpg" width="760" height="570" alt="朗朗读书声班级晨读活动" class="org-img" loading="lazy">
+          </button>
           <div class="org-body">
             <h3>「朗朗读书声」班级晨读活动</h3>
             <p class="org-meta">班长（活动发起人）· 2021</p>

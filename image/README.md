@@ -130,16 +130,33 @@
 | 板块 | 类名 | 证书框比例 | 列数 | 说明 |
 |---|---|---|---|---|
 | 个人荣誉 | `.cert-grid` | 4:3 横版 | 5 列 × 3 行 | 15 项正好排满，**点开看大图** |
-| 软件著作权 | `.cert-grid.cert-grid--copyright` | 3:4 竖版 | 6 列 × 1 行 | 6 项正好排满 |
+| 软件著作权 | `.cert-grid.cert-grid--copyright` | 3:4 竖版 | 6 列 × 1 行 | 6 项正好排满，**点开看大图** |
 | 获奖作品 | `.work-grid` | 4:3 横版 | 2 列 × 1 行 | 各占半屏，**点开看大图** |
-| 论文 / 专利 | `.paper-card--media` | 按图片原始比例 | 卡片左侧 120px | 见下 |
+| 论文 / 专利 | `.paper-card--media` | 按图片原始比例 | 卡片左侧 120px | 见下，**点开看大图** |
+| 活动照 | `.org-grid` | 按图片原始比例 | 3 列 | **点开看大图** |
+| 首屏个人照 | `.hero-photo` | 按图片原始比例 | — | **点开看大图** |
+| 学历校徽 | `.edu-logo` | 按图片原始比例 | — | **点开看大图** |
 
 > **「点开看大图」是怎么实现的**：图片本身不绑点击，外面套一层
-> `<button class="cert-shot" data-zoom="图片地址">`。放大的功能写在
-> `js/script.js` 第 6 节，它去找页面上**所有** `[data-zoom]`，
-> 所以想给别的图也加上，照抄一层按钮即可，不用改 JS。
-> 按钮壳的样式（去掉默认外观、`zoom-in` 光标、悬停压暗、键盘焦点框）
-> 在 `css/style.css` 里由 `.cert-shot` / `.work-shot` 共用一组规则。
+> `<button data-zoom="图片地址">`。放大的功能写在 `js/script.js` 第 6 节，
+> 它去找页面上**所有** `[data-zoom]`，所以想给别的图也加上，
+> 照抄一层按钮即可，不用改 JS。
+
+> **三个类名的来历**：`.cert-shot` 和 `.work-shot` 是最早只有证书墙和获奖作品
+> 时才起的，后来活动照、论文凭证图、首屏个人照、校徽也接上了，新加的一律用
+> 通用的 `.zoom-shot`。三者样式共用 `css/style.css` 里的一组规则，唯一的差别是
+> `.cert-shot` / `.work-shot` 多一条 `margin-bottom: 14px`（图下面压着标题的才需要）。
+> 只有软著那组例外，见下面的说明。
+>
+> 首屏个人照和校徽各带一个修饰类：`.zoom-shot--fit`（缩成图片宽度，
+> 不能撑开那一行 flex）、`.zoom-shot--logo`（把校徽的绝对定位从图片挪到按钮上）。
+> 这两个别按普通 `.zoom-shot` 抄。
+
+> **软著卡片为什么单独写了条 `margin-bottom: 0`**：软著那 6 张图原本是裸 `<img>`，
+> 直接贴着标题的（荣誉墙那边才留 14px）。套上 `.cert-shot` 之后会把荣誉墙那
+> 14px 一起带过来，整组卡片凭空高 14px、跟加放大之前的版面就不一样了。
+> 所以 `css/style.css` 里有一条 `.cert-grid--copyright .cert-card .cert-shot` 把它压回 0。
+> 这条**必须写在 `.cert-card .cert-shot` 后面**——两条特异性一样，靠源码顺序决胜。
 
 比例靠 CSS 变量 `--cert-ratio` 控制，改一个数字整个板块生效。
 
@@ -168,8 +185,11 @@
 - **想增删活动**：`index.html` 的 `#organization` 板块里，
   一个 `<article class="org-card">` 就是一张卡片。
   复制整块能加一项，删掉整块能减一项。网格会自动重排，不用改 CSS。
+  **里面那层 `<button class="zoom-shot" data-zoom="...">` 要一起复制**——
+  点击放大靠它触发，漏掉按钮图就点不开了。
 - **想加第 10 张活动图**：命名成 `activity-10.jpg`，
-  在 `#organization` 里复制一张卡片，把 `src` 改成 `image/activity-10.jpg`。
+  在 `#organization` 里复制一张卡片，把 `src` 改成 `image/activity-10.jpg`，
+  `data-zoom` 也要一起改。
 - **想增删荣誉证书**：复制一整块 `<article class="cert-card">`，**连里面那层
   `<button class="cert-shot" data-zoom="...">` 一起复制**——链接和图都在按钮上，
   漏掉按钮图就点不开了。三个地方要同步改：`data-zoom`、`<img>` 的 `src`、
@@ -178,9 +198,12 @@
   15 项是 5 列 × 3 行的整数倍，增减后如果排不满，
   末行会空出格子——这时改一下 `.cert-grid` 的列数（`repeat(N, minmax(0, 1fr))`）。
 - **想再加一张获奖作品**：复制一整块 `<article class="work-card">`。
-  外面的 `<button data-zoom="图片地址">` 不能省——点击放大的功能靠它触发
-  （`js/script.js` 第 6 节会去找所有带 `data-zoom` 的元素）。
+  外面的 `<button class="work-shot" type="button" data-zoom="图片地址">` 不能省——
+  点击放大的功能靠它触发（`js/script.js` 第 6 节会去找所有带 `data-zoom` 的元素）。
   大图里显示的文字直接取按钮里那张小图的 `alt`，所以 `alt` 别留空。
+- **换首屏个人照 / 校徽**：文件名不变就能直接覆盖。这两处的按钮各带一个修饰类
+  （`.zoom-shot--fit` / `.zoom-shot--logo`），复制卡片时别把修饰类丢了——
+  丢了的话个人照会把右边那栏挤下去、校徽会飞到卡片左上角。
 
 ## 关于体积（重要）
 

@@ -65,6 +65,12 @@ npx --yes serve -l 8080 .
 （个人照、头像、9 张活动照、2 张校徽、15 张荣誉证书、6 张软著证书、
 2 张获奖作品页、论文与专利的凭证各 1 张）。**只剩 4 处占位符**：
 
+> 除了导航栏那个 32px 的头像，**页面上其余 37 张图都能点开看原图**
+> （点图 → 全屏大图，Esc 或点空白处关闭）。实现方式见
+> `image/README.md` 的「点开看大图」一节。
+> 头像不点的原因：它套在 `.nav-brand` 这个 `<a>` 里，`<button>` 不能嵌在 `<a>` 里，
+> 而且 32px 的站标放大了也没有可看的信息。
+
 | 待补内容 | 在哪 | 怎么补 |
 |---|---|---|
 | 论文准确标题 | `index.html` `#research` | 从 IEEE Xplore 复制论文标题 |
@@ -105,10 +111,11 @@ npx --yes serve -l 8080 .
 | 论文 / 专利 / 软著 | `#research` 板块 |
 | 顶部的成果数字小窗（5 个） | `#research` 板块 `.stats-row` 里的 `.stat` |
 | 个人荣誉（15 项） | `#honors` 板块 `.cert-card`，图片套在 `.cert-shot` 按钮里（点开看大图） |
-| 获奖作品（2 项） | `#honors` 板块的「获奖作品」小组 `.work-card` |
+| 获奖作品（2 项） | `#honors` 板块的「获奖作品」小组 `.work-card`，图套在 `.work-shot` 按钮里 |
 | 项目卡片（6 个） | `#projects` 板块 `.project-card` |
-| 组织经历（9 项） | `#organization` 板块 `.org-card` |
-| 校徽 | `image/logo-dlou.png`、`image/logo-zut.png` |
+| 组织经历（9 项） | `#organization` 板块 `.org-card`，图套在 `.zoom-shot` 按钮里 |
+| 首屏个人照 | `index.html` 的 `#home` → `.hero-photo`（按钮带 `.zoom-shot--fit`，别丢） |
+| 校徽 | `image/logo-dlou.png`、`image/logo-zut.png`（按钮带 `.zoom-shot--logo`，别丢） |
 | 博客文章 | 自动从 CSDN 同步，见下面「博客文章（自动同步）」 |
 | 某篇博客的描述 | `scripts/sync-blog.js` 顶部的 `DESC_OVERRIDES` |
 | 邮箱、电话、GitHub、微信 | `#contact` 板块 |

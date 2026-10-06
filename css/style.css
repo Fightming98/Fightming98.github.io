@@ -947,43 +947,81 @@ img { max-width: 100%; display: block; }
   border-radius: var(--r-md);
 }
 
-/* ---------- 点击放大的图框（证书墙 / 获奖作品共用） ----------
-   图片本身不绑点击，外面包一层 <button>（.cert-shot / .work-shot），
-   这里把 <button> 的默认外观全部清掉，让它看起来只是个「能点的图框」。
+/* ---------- 点击放大的图框（证书墙 / 获奖作品 / 活动照 / 论文凭证 共用） ----------
+   图片本身不绑点击，外面包一层 <button>，这里把 <button> 的默认外观
+   全部清掉，让它看起来只是个「能点的图框」。
    cursor: zoom-in 是给鼠标的提示：点下去是放大，不是跳转。
 
    为什么用 <button> 不用 <a>：点开是站内看大图，不是跳转，
    button 语义才对，而且键盘 Tab 能聚焦、回车就能触发。
    放大本身由 js/script.js 第 6 节统一处理——它找的是 [data-zoom]，
-   所以想给别的图也加上，只要套个 <button data-zoom="大图地址"> 就行 */
+   所以想给别的图也加上，只要套个 <button data-zoom="大图地址"> 就行。
+
+   .cert-shot / .work-shot 是最早只有证书墙和获奖作品时才起的名字，
+   后来活动照、论文凭证图也接上了，新加的一律用通用的 .zoom-shot。
+   三者样式完全一样，唯一的差别是下面那条 margin */
 .cert-shot,
-.work-shot {
+.work-shot,
+.zoom-shot {
   display: block;
   width: 100%;
   padding: 0;
   border: 0;
-  margin-bottom: 14px;
   background: none;
   font: inherit;
   color: inherit;
   cursor: zoom-in;
 }
 
+/* 只有「图下面还压着标题文字」的才需要这段间隔。
+   活动照和论文凭证图是贴着容器边缘的，加了会在图和正文之间多出一条缝 */
+.cert-shot,
+.work-shot { margin-bottom: 14px; }
+
+/* 首屏那张个人照是个例外：它待在一行 flex 里，按钮得缩成图片本身的宽度。
+   上面那条 width: 100% 会让按钮把整行撑开，把右边的自我介绍挤下去 */
+.zoom-shot--fit {
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* 校徽：学历卡右上角那枚 48px 的角标。
+   它原本是绝对定位的，包上按钮之后定位得挪到按钮上、图片退回普通流填满按钮——
+   否则按钮会按 width: 100% 掉到卡片左上角去，图片也还是孤零零贴在右上角。
+   width/height 写死 48px 是为了压过上面 .zoom-shot 的 width: 100%
+   （两者特异性一样，靠源码顺序取胜，所以这条必须排在它后面） */
+.zoom-shot--logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+}
+
+.zoom-shot--logo .edu-logo {
+  position: static;
+  width: 100%;
+  height: 100%;
+}
+
 /* 键盘 Tab 移过来时要看得见焦点。outline-offset 留条缝，
    否则蓝色描边贴着图片边缘，看不清是哪张被选中 */
 .cert-shot:focus-visible,
-.work-shot:focus-visible {
+.work-shot:focus-visible,
+.zoom-shot:focus-visible {
   outline: 2px solid var(--c-accent);
   outline-offset: 3px;
 }
 
 /* 悬停时压暗一点，配合 zoom-in 光标，让人知道它是可以点的 */
 .cert-shot:hover .cert-img,
-.work-shot:hover .work-img { opacity: .87; }
+.work-shot:hover .work-img,
+.zoom-shot:hover img { opacity: .87; }
 
 /* 间距挪到按钮上之后，图片自己不能再留一份，
    否则 14px 会变成「图片和按钮底边之间」的空隙，卡片里多出一截 */
-.cert-shot .cert-img { margin-bottom: 0; }
+.cert-shot .cert-img,
+.zoom-shot img { margin-bottom: 0; }
 
 /* 论文 / 专利卡片里的凭证图。
    证书墙要的是整齐，所以那边用固定的 4:3 / 3:4 框、contain 裁不掉内容；
@@ -1043,6 +1081,14 @@ img { max-width: 100%; display: block; }
    写 .cert-img 的话会跟上面「点击放大的图框」里的 margin-bottom: 0 打架 */
 .cert-card .cert-ph,
 .cert-card .cert-shot { margin-bottom: 14px; }
+
+/* 软著那组不要这条 14px —— 它原来的图就是直接贴着标题的
+   （裸 <img>，既没套按钮也没别的间隔）。这次只是给图加「点击放大」，
+   不该顺手把排版也改了：带上 14px 的话整组卡片凭空高 14px，
+   跟加放大之前的版面就对不上。
+   必须写在上面那条后面、并且多带一层 .cert-card：
+   两条特异性要是一样，就纯靠源码顺序决胜，挪上去就失效了 */
+.cert-grid--copyright .cert-card .cert-shot { margin-bottom: 0; }
 
 .cert-card h4 {
   font-size: .9375rem;
@@ -1587,8 +1633,12 @@ body.no-scroll { overflow: hidden; }
 
   /* 论文 / 专利卡片：证书挪到文字上方，否则 120px 的证书挤得正文只剩窄窄一条 */
   .paper-card--media .paper-body { grid-template-columns: 1fr; gap: 16px; }
+  /* 图外面包了放大按钮之后，宽度得算在按钮上：
+     按钮按 .zoom-shot 是 width: 100%，手机上会把整张卡片占满，
+     变成点哪儿都触发放大；图片本身又还是缩在左边 112px */
   .paper-card--media .cert-ph,
-  .paper-card--media .cert-img {
+  .paper-card--media .cert-img,
+  .paper-card--media .zoom-shot {
     width: 112px;
     margin-bottom: 0;
   }
