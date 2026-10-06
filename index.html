@@ -96,11 +96,8 @@
 
           <div class="hero-photo-row">
             <!-- TODO: 放一张竖版个人照到 image/photo.jpg（建议 480×600） -->
-            <!-- zoom-shot--fit：这张待在一行 flex 里，按钮要缩成图片宽度，
-                 不能像别处那样 width: 100% 把整行撑开 -->
-            <button class="zoom-shot zoom-shot--fit" type="button" data-zoom="image/photo.jpg">
-              <img src="image/photo.jpg" alt="王明豪" class="hero-photo" width="180" height="225" decoding="async">
-            </button>
+            <!-- 这张不接点击放大：它是首屏的一张肖像，不是需要看清细节的凭证 -->
+            <img src="image/photo.jpg" alt="王明豪" class="hero-photo" width="180" height="225" decoding="async">
 
             <div class="hero-bio">
               <p>
@@ -133,10 +130,9 @@
           <!-- 学历卡片的五行信息，每行独立一个标签，视觉权重依次递减：
                时间（最淡）→ 学校（最大）→ 学院 → 专业 → 担任职务（主题色强调） -->
           <div class="edu-card reveal">
-            <button class="zoom-shot zoom-shot--logo" type="button" data-zoom="image/logo-dlou.png">
-              <img src="image/logo-dlou.png" alt="大连海洋大学" class="edu-logo"
-                   width="48" height="48" loading="lazy">
-            </button>
+            <!-- 校徽不接点击放大：48px 的角标，学校里名字已经写在下面一行了 -->
+            <img src="image/logo-dlou.png" alt="大连海洋大学" class="edu-logo"
+                 width="48" height="48" loading="lazy">
             <span class="edu-badge">硕士研究生</span>
             <p class="edu-date">2024.09–2027.07</p>
             <h3>大连海洋大学（应用海洋学研究所）</h3>
@@ -145,10 +141,9 @@
           </div>
 
           <div class="edu-card reveal">
-            <button class="zoom-shot zoom-shot--logo" type="button" data-zoom="image/logo-zut.png">
-              <img src="image/logo-zut.png" alt="中原工学院" class="edu-logo"
-                   width="48" height="48" loading="lazy">
-            </button>
+            <!-- 校徽不接点击放大：48px 的角标，学校里名字已经写在下面一行了 -->
+            <img src="image/logo-zut.png" alt="中原工学院" class="edu-logo"
+                 width="48" height="48" loading="lazy">
             <span class="edu-badge">本科</span>
             <p class="edu-date">2020.09–2024.07</p>
             <h3>中原工学院</h3>
