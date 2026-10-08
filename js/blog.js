@@ -12,46 +12,46 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.07',
+    title: 'AutoGPT这种自主性Agent框架，如何实现自主决策的？',
+    desc:  '本文探讨大模型实现自主决策的六大核心要素：基于任务分解的基本思路，通过Prompt工程构建决策逻辑；依赖工具调用机制拓展外部能力…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167219403',
+    tags:  ['AutoGPT', '自主性Agent'],
+  },
+  {
+    date:  '2026.10.07',
+    title: '几种主流的Agent框架各自的特点？LangChain、LangGraph、LlamaIndex、BabyAGI等',
+    desc:  '本文梳理了智能体开发的核心思路，介绍LangChain通过工具链与LLM构建Agent的实现方式，强调其零样本反思（zero-shot-react）能力…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167219205',
+    tags:  ['langchain', 'LlamaIndex'],
+  },
+  {
+    date:  '2026.10.07',
+    title: 'Agent在多模态任务中如何执行推理？',
+    desc:  '本文基于GPT-4 Vision模型，通过Base64编码上传图像，实现图文理解与问答。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167218982',
+    tags:  ['Agent', '多模态'],
+  },
+  {
+    date:  '2026.10.07',
+    title: 'Agent如何进行动态API调用？Function Calling？插件？',
+    desc:  '本文以OpenAI Function Calling为例，介绍其调用流程：通过定义工具函数（如获取天气），模型在对话中判断是否需调用外部API…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167218124',
+    tags:  ['工具调用', 'Agent'],
+  },
+  {
+    date:  '2026.10.07',
+    title: '让Agent具备长期记忆的两种方法（RAG只是其一）',
+    desc:  '本文围绕大模型应用中的关键挑战，提出MemGPT的分层记忆架构，实现高效长上下文管理。通过分层存储与动态检索机制，提升记忆利用率与响应精度。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167217118',
+    tags:  ['RAG', '分层记忆'],
+  },
+  {
     date:  '2026.10.05',
     title: 'Agent完整工作过程',
     desc:  '本文概述大模型规划能力的基本思路，聚焦当前主流的ReAct框架，结合思维链（Chain-of-Thought）与环境交互实现动态决策。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/167128270',
     tags:  ['ReAct', 'Agent完整工作流程'],
-  },
-  {
-    date:  '2026.10.05',
-    title: 'LLM Agent核心架构、常见功能、工作机制？',
-    desc:  'LLMAgent是基于大语言模型的智能代理，具备规划、记忆、工具调用与自我反思能力，区别于传统AI的静态响应。其核心架构包含规划、记忆、工具、反思四大模块。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167127853',
-    tags:  ['LLM Agent'],
-  },
-  {
-    date:  '2026.10.05',
-    title: '大模型应用中，如何实现短期记忆与长期记忆',
-    desc:  '本文系统梳理了大模型记忆系统的构建思路，详解记忆的读写流程与LangChain记忆模块实现机制，涵盖临时记忆、向量存储等核心组件。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167127715',
-    tags:  ['记忆', 'LangChain'],
-  },
-  {
-    date:  '2026.10.05',
-    title: 'ReAct的原理？与CoT的区别是啥？',
-    desc:  '本文系统介绍大模型推理的核心知识，对比ReAct与链式推理（CoT）在思维过程上的差异，展示实用Prompt模板设计，总结工程实现中的关键要点，如提示优化…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167127585',
-    tags:  ['ReAct', 'CoT'],
-  },
-  {
-    date:  '2026.10.05',
-    title: 'Computer Use原理是啥？与传统RPA的区别？',
-    desc:  '传统RPA依赖固定脚本与界面元素，稳定性强但灵活性差；ComputerUse基于大模型视觉理解，可自主解读界面、决策操作，适应动态变化。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167127481',
-    tags:  ['Computer Use', '传统RPA'],
-  },
-  {
-    date:  '2026.10.05',
-    title: 'Manus、OpenClaw这种通用Agent了解过吗？',
-    desc:  '本文介绍Manus。另外聚焦大语言模型（LLM）如GPT、Claude等作为智能底座，衍生出代码专用垂直智能体（如Cursor…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167127147',
-    tags:  ['Manus', 'OpenClaw'],
   },
 ];
 /* SYNC:END */
