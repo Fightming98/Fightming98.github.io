@@ -113,29 +113,73 @@ function buildBlock(posts) {
   return `const POSTS = [\n${items}\n];`;
 }
 
+/* Node 的 fetch 一失败就只回一句 "fetch failed"，真正的原因
+   （域名解析不了 / 连接被重置 / 超时 / 证书问题）藏在 e.cause 里。
+   2026-10-09 那次定时任务变红，日志里就只有这四个字，等于什么都没说。
+   把整条 cause 链摊平打出来，下次再红直接能看出断在哪一步。 */
+function describeError(e) {
+  const lines = [];
+  for (let cur = e, depth = 0; cur && depth < 5; depth++) {
+    const line = [
+      cur.code,
+      cur.name && cur.name !== 'Error' ? cur.name : '',
+      cur.message,
+    ].filter(Boolean).join(' ');
+    if (line && !lines.includes(line)) lines.push(line);
+    cur = cur.cause;
+  }
+  // 倒过来输出：根因在前，一路「往上表现为」后面的
+  return lines.reverse().join('  ←  ') || String(e);
+}
+
+const ATTEMPTS = 3;               // 一共试几次
+const RETRY_WAIT = [3000, 8000];  // 每次失败后歇多久再试
+
+/* 拉 CSDN 的接口，失败自动重试。
+   这个任务每天定时跑一次、中间隔着整个公网，偶尔断一下是常态：
+   2026-10-09 那次，同一台 runner 三秒前才从 github.com 下完 Node，
+   说明网络出口是通的，可这一个请求 1.4 秒就断了——典型的瞬时故障。
+   一次抖动不该让任务标红、更不该让人以为同步真的挂了，所以给它重试的机会。
+   三次全失败才认输。 */
+async function fetchJSON(url) {
+  for (let i = 1; i <= ATTEMPTS; i++) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          // UA 和 Referer 缺一不可，少哪个都是 521
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                      + '(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+          'Referer': `https://blog.csdn.net/${USERNAME}`,
+          'Accept': 'application/json, text/plain, */*',
+          'Accept-Language': 'zh-CN,zh;q=0.9',
+        },
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const json = await res.json();
+      if (i > 1) console.log(`  ✓ 第 ${i} 次尝试成功`);
+      return json;
+    } catch (e) {
+      console.error(`  ✗ 第 ${i}/${ATTEMPTS} 次失败：${describeError(e)}`);
+      if (i === ATTEMPTS) throw e;
+      console.error(`     ${RETRY_WAIT[i - 1] / 1000}s 后重试`);
+      await new Promise(r => setTimeout(r, RETRY_WAIT[i - 1]));
+    }
+  }
+}
+
 async function main() {
   const api = 'https://blog.csdn.net/community/home-api/v1/get-business-list'
             + `?page=1&size=20&businessType=blog&username=${USERNAME}`;
 
   let json;
   try {
-    const res = await fetch(api, {
-      headers: {
-        // UA 和 Referer 缺一不可，少哪个都是 521
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                    + '(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-        'Referer': `https://blog.csdn.net/${USERNAME}`,
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'zh-CN,zh;q=0.9',
-      },
-      signal: AbortSignal.timeout(30000),
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    json = await res.json();
+    json = await fetchJSON(api);
   } catch (e) {
     // 关键：拉不到就原样退出，绝不清空已有内容。
     // 要是一失败就写空数组，CSDN 抽风一次线上博客区就白了。
-    console.error(`✗ 拉取 CSDN 失败：${e.message}`);
+    // 具体原因在上面每次重试那几行里，这里只下结论
+    console.error(`✗ 拉取 CSDN 失败，${ATTEMPTS} 次都没成，放弃。`);
     console.error('  已保留 js/blog.js 的现有内容，未做任何修改。');
     process.exit(1);
   }

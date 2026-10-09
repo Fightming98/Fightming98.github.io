@@ -16,15 +16,24 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # v5 起这两个 action 自己改用 Node 24 运行。
+      # v4 会被 runner 强制拉到 Node 24 上跑，日志里每次都多一条
+      # 「Node.js 20 is deprecated」的黄色警告。
+      # 不直接上 v6/v7：v6 把凭据改存到单独的文件里，
+      # 而下面那步是裸的 `git push`，靠的正是 checkout 写进本地 config 的凭据。
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'    # 脚本用了 fetch 和 AbortSignal.timeout，需要 Node 18+
+          # 脚本用了 fetch 和 AbortSignal.timeout，Node 18+ 即可。
+          # 20 在 2026-04 已经 EOL、不再有安全补丁，所以跟着往上走
+          node-version: '24'
 
       # 脚本拉不到 CSDN 时会以退出码 1 结束，这一步就会标红，
       # 并且不会动 js/blog.js —— 失败时线上内容原样保留，不会变空。
       # Actions 页面出现红叉就是这个意思：该去检查同步是不是挂了。
+      # 脚本自己会重试 3 次（3s、8s 退避），一次网络抖动不会标红；
+      # 真标红了就是三次都失败，日志里每次的原因都打出来了。
       - name: 拉取 CSDN 最近文章
         run: node scripts/sync-blog.js
 
