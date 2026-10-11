@@ -840,6 +840,25 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
 }
 
+/* DOI 那行。比正文小半档、不用正文色——它是给要引用的人抄的标识符，
+   不是论文简介的一部分，混在 .paper-meta 里会被当成正文读下去。
+   overflow-wrap 是防窄屏的：DOI 是一整串没有空格的字符，
+   卡片宽度到 320px 以下时得允许它从中间断开，否则会撑破卡片 */
+.paper-doi {
+  font-size: .8125rem;
+  color: var(--c-text-3);
+  margin-bottom: 16px;
+  overflow-wrap: anywhere;
+}
+.paper-doi a {
+  color: var(--c-text-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.paper-doi a:hover {
+  color: var(--c-accent);
+}
+
 /* ---------- 成果数量概览 ---------- */
 .stats-row {
   display: grid;
