@@ -12,6 +12,20 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.10',
+    title: 'LangChain中如何实现RAG？',
+    desc:  '评估RAG效果需从准确性、相关性、一致性与流畅性四方面入手。可通过人工评分、BLEU、ROUGE等指标量化生成结果，结合真实用户反馈与检索召回率分析。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167475546',
+    tags:  ['langchain', 'RAG'],
+  },
+  {
+    date:  '2026.10.10',
+    title: 'LangChain是干啥的？有哪些核心组件？',
+    desc:  'LangChain中，Chains用于串联多个LLM任务，如翻译与总结；Agent通过工具自主决策执行；Memory实现上下文记忆…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167466801',
+    tags:  ['langchain', 'AI应用'],
+  },
+  {
     date:  '2026.10.08',
     title: '大模型微调技术LoRA、Q-LoRA等',
     desc:  '本文系统介绍大模型微调技术：首先概述基础微调方法，指出其参数量大、成本高的局限；随后详解LoRA（低秩适应）技术，通过引入低秩矩阵分解…',
@@ -37,20 +51,6 @@ const POSTS = [
     title: '如何处理AI模型的公平性与透明性问题？',
     desc:  '',
     url:   'https://blog.csdn.net/m0_59777389/article/details/167278800',
-    tags:  ['人工智能', 'AI应用'],
-  },
-  {
-    date:  '2026.10.08',
-    title: '生产环境下，如何监控和维护AI模型的性能？',
-    desc:  '',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167278707',
-    tags:  ['人工智能', 'AI应用'],
-  },
-  {
-    date:  '2026.10.08',
-    title: '举例说明一个AI项目从需求分析到部署的完整流程',
-    desc:  '',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167276822',
     tags:  ['人工智能', 'AI应用'],
   },
 ];
