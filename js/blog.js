@@ -12,6 +12,13 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.14',
+    title: '提示词工程02',
+    desc:  '本文系统阐述了提示词工程的核心技巧：通过任务分解明确需求，运用正负向提示精准控制输出，优化长提示词提升效率，实现提示词链接与领域专用化。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/167892356',
+    tags:  ['Prompt', '提示词工程'],
+  },
+  {
     date:  '2026.10.11',
     title: '提示词工程01',
     desc:  '本文系统梳理了高效Prompt设计的核心技巧：包含结构化指令、角色设定、格式控制、约束条件与Few-shot示例，结合CoT思维链…',
@@ -45,13 +52,6 @@ const POSTS = [
     desc:  'LangChain 1.0核心升级为统一的Runnable接口，实现链式调用与模块化设计。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/167587335',
     tags:  ['langchain1.0', 'Runnable接口'],
-  },
-  {
-    date:  '2026.10.11',
-    title: 'LangChain如何实现多路召回结果的动态权重分配？',
-    desc:  '本文介绍基于动态权重的多路召回机制，结合向量与BM25检索，通过查询长度或LLM智能分析实现权重自适应分配，并采用RRF算法融合排序结果，提升检索精准度。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167587212',
-    tags:  ['langchain', '多路召回'],
   },
 ];
 /* SYNC:END */
