@@ -12,6 +12,20 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.16',
+    title: 'Agent SDK(软件开发工具包)与Subagents的关系是什么？',
+    desc:  '该系统基于Claude Agent SDK实现模块化开发，支持重构auth模块并自动跑测试。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168144874',
+    tags:  ['AgentSDK', '上下文窗口隔离'],
+  },
+  {
+    date:  '2026.10.16',
+    title: 'Resume与Fork session在会话管理上有何不同？',
+    desc:  'ClaudeCode的FileCheckpointing通过在修改文件前自动快照并绑定对话轮次，实现精准回滚。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168143476',
+    tags:  ['ClaudeCode', 'Agent'],
+  },
+  {
     date:  '2026.10.14',
     title: '提示词工程02',
     desc:  '本文系统阐述了提示词工程的核心技巧：通过任务分解明确需求，运用正负向提示精准控制输出，优化长提示词提升效率，实现提示词链接与领域专用化。',
@@ -38,20 +52,6 @@ const POSTS = [
     desc:  '本文系统讲解LangChain核心组件：区分LLM与ChatModel，实战Prompt模板设计，规避输出解析器常见陷阱，解析流式输出原理。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/167587639',
     tags:  ['langchain', 'Model'],
-  },
-  {
-    date:  '2026.10.11',
-    title: 'LangChain的核心架构',
-    desc:  'LangServe将LangChain链快速转为API，通过FastAPI实现，一行代码即可暴露服务。拆包便于模块化与复用，提升可维护性。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167587540',
-    tags:  ['langchain', 'LangServer'],
-  },
-  {
-    date:  '2026.10.11',
-    title: '什么是LangChain？',
-    desc:  'LangChain 1.0核心升级为统一的Runnable接口，实现链式调用与模块化设计。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167587335',
-    tags:  ['langchain1.0', 'Runnable接口'],
   },
 ];
 /* SYNC:END */
