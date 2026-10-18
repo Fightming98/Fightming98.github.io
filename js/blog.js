@@ -12,46 +12,46 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.17',
+    title: 'CLAUDE.md文件与MEMORY.md文件，两套记忆机制啥区别？',
+    desc:  'ClaudeCode中的CLAUDE.md与MEMORY.md代表两种截然不同的记忆机制：前者是开发者编写的“项目宪法”，定义规则与标准，固定且共享…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168249785',
+    tags:  ['CLAUDE.md', 'MEMORY.md'],
+  },
+  {
+    date:  '2026.10.17',
+    title: '内置skill（如/code-review、/debug）与内置命令（如/help、/compact）的区别',
+    desc:  'ClaudeCode中内置命令（如 /help、/compact）为本地客户端操作，零Token消耗，用于会话控制…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168249569',
+    tags:  ['内置Skill', '内置命令'],
+  },
+  {
+    date:  '2026.10.17',
+    title: 'Auto Memory(MEMORY.md)在session启动时被加载到上下文',
+    desc:  'MEMORY.md定位为“索引”而非“记忆库”，其加载量受两大约束控制：文件大小与行数限制。当超过200行或25K字符时，触发超限问题，影响模型理解。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168238699',
+    tags:  ['MEMORY.md', 'CLAUDE.md'],
+  },
+  {
+    date:  '2026.10.17',
+    title: 'Agent Loop标准执行循环包括哪些关键阶段？',
+    desc:  '本文提出五阶段智能系统运行框架：①上下文组装，整合多源信息；②模型推理，生成决策逻辑；③工具分发，匹配合适工具；④权限守门，确保操作合规…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168226630',
+    tags:  ['AgentLoop', '上下文组装'],
+  },
+  {
+    date:  '2026.10.17',
+    title: 'Agent SDK默认将哪三类状态写入本地磁盘？',
+    desc:  '采用子进程模式部署，确保多租户隔离安全。SessionStore为镜像而非替代，保障数据一致性。支持四种Session部署方式，灵活适配场景。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168222569',
+    tags:  ['AgentSDK', 'SessionStore'],
+  },
+  {
     date:  '2026.10.16',
     title: 'Agent SDK(软件开发工具包)与Subagents的关系是什么？',
     desc:  '该系统基于Claude Agent SDK实现模块化开发，支持重构auth模块并自动跑测试。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/168144874',
     tags:  ['AgentSDK', '上下文窗口隔离'],
-  },
-  {
-    date:  '2026.10.16',
-    title: 'Resume与Fork session在会话管理上有何不同？',
-    desc:  'ClaudeCode的FileCheckpointing通过在修改文件前自动快照并绑定对话轮次，实现精准回滚。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168143476',
-    tags:  ['ClaudeCode', 'Agent'],
-  },
-  {
-    date:  '2026.10.14',
-    title: '提示词工程02',
-    desc:  '本文系统阐述了提示词工程的核心技巧：通过任务分解明确需求，运用正负向提示精准控制输出，优化长提示词提升效率，实现提示词链接与领域专用化。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167892356',
-    tags:  ['Prompt', '提示词工程'],
-  },
-  {
-    date:  '2026.10.11',
-    title: '提示词工程01',
-    desc:  '本文系统梳理了高效Prompt设计的核心技巧：包含结构化指令、角色设定、格式控制、约束条件与Few-shot示例，结合CoT思维链…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167588540',
-    tags:  ['提示词工程', 'Prompt'],
-  },
-  {
-    date:  '2026.10.11',
-    title: 'LlamaIndex如何与LangChain结合？',
-    desc:  '本文介绍了基于LlamaIndex与LangChain集成的Agent开发思路，重点阐述工具配置（IndexToolConfig）…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167587812',
-    tags:  ['langchain', 'llamaindex'],
-  },
-  {
-    date:  '2026.10.11',
-    title: '什么是LangChain Model、LangChain Agent？',
-    desc:  '本文系统讲解LangChain核心组件：区分LLM与ChatModel，实战Prompt模板设计，规避输出解析器常见陷阱，解析流式输出原理。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/167587639',
-    tags:  ['langchain', 'Model'],
   },
 ];
 /* SYNC:END */
