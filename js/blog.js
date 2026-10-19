@@ -12,6 +12,13 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.18',
+    title: 'Channels在ClaudeCode中的作用是啥？与传统轮询式活新建会话式集成的区别是啥？',
+    desc:  'Anthropic的ClaudeCode Channels（2026年3月推出）是一项革命性机制…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/168251081',
+    tags:  ['Channels', 'MCP'],
+  },
+  {
     date:  '2026.10.17',
     title: 'CLAUDE.md文件与MEMORY.md文件，两套记忆机制啥区别？',
     desc:  'ClaudeCode中的CLAUDE.md与MEMORY.md代表两种截然不同的记忆机制：前者是开发者编写的“项目宪法”，定义规则与标准，固定且共享…',
@@ -45,13 +52,6 @@ const POSTS = [
     desc:  '采用子进程模式部署，确保多租户隔离安全。SessionStore为镜像而非替代，保障数据一致性。支持四种Session部署方式，灵活适配场景。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/168222569',
     tags:  ['AgentSDK', 'SessionStore'],
-  },
-  {
-    date:  '2026.10.16',
-    title: 'Agent SDK(软件开发工具包)与Subagents的关系是什么？',
-    desc:  '该系统基于Claude Agent SDK实现模块化开发，支持重构auth模块并自动跑测试。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168144874',
-    tags:  ['AgentSDK', '上下文窗口隔离'],
   },
 ];
 /* SYNC:END */
