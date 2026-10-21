@@ -1173,11 +1173,23 @@ img { max-width: 100%; display: block; }
   margin-bottom: 6px;
 }
 
+/* 名称和说明现在排在卡片顶部、图片前面。
+   原来靠 margin-top: auto 把说明顶到卡片底部，现在图片才是最后一块，
+   这个 auto 会把它推回下面去，得去掉；
+   改由这里留出说明和第一张图之间的间隔 */
 .work-card p {
-  margin-top: auto;
+  margin-bottom: 18px;
   font-size: .8125rem;
   line-height: 1.6;
   color: var(--c-text-3);
+}
+
+/* 图片落到卡片底部之后，`.work-shot` 那 14px（原本是图与标题之间的间隔）
+   就变成了图片下方的额外留白，卡片会显得上紧下松。两页那种情况里，
+   最后那个 .work-page 同理。第一页不用管——它下面还有第二页要隔开 */
+.work-card > .work-shot,
+.work-card .work-page:last-child {
+  margin-bottom: 0;
 }
 
 

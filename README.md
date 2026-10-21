@@ -129,7 +129,7 @@ npx --yes serve -l 8080 .
 | 知识产权申请登记表（6 项） | `#research` 板块的「知识产权申请登记表」小组（紧跟软著证书那排），`image/copyright-form-*.jpg`（**已脱敏，别拿原始件盖回来**） |
 | 顶部的成果数字小窗（5 个） | `#research` 板块 `.stats-row` 里的 `.stat` |
 | 个人荣誉（15 项） | `#honors` 板块 `.cert-card`，图片套在 `.cert-shot` 按钮里（点开看大图） |
-| 获奖作品（2 项 / 3 页） | `#honors` 板块的「获奖作品」小组 `.work-card`，图套在 `.work-shot` 按钮里。2025 那件作品是一张卡片里上下两页（`.work-page` + `.work-page-label`），2024 那张只有一页 |
+| 获奖作品（2 项 / 3 页） | `#honors` 板块的「获奖作品」小组 `.work-card`：名称（`<h4>`）和说明（`<p>`）在卡片顶部，图片在下、套在 `.work-shot` 按钮里。2025 那件作品是一张卡片里上下两页（`.work-page` + `.work-page-label`），2024 那张只有一页 |
 | 项目卡片（6 个） | `#projects` 板块 `.project-card` |
 | 组织经历（9 项） | `#organization` 板块 `.org-card`，图套在 `.zoom-shot` 按钮里 |
 | 首屏个人照 | `index.html` 的 `#home` → `.hero-photo`（**不接放大**） |
