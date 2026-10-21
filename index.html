@@ -810,14 +810,33 @@
           <p>第三届全国智慧海洋大数据应用创新大赛 优胜奖 · 2024 · 收录于大赛作品汇编</p>
         </article>
 
+        <!-- 这件作品在汇编里占连续两页，所以一张卡片里上下排开、各带一个页码，
+             不拆成两张卡片——拆开的话两列网格会空出半格，而且「2 项」的说法也不对了。
+             两张图各自是一个跨页扫描，点任意一张都能单独看大图 -->
         <article class="work-card reveal">
-          <button class="work-shot" type="button"
-                  data-zoom="image/ocean-work-2025.jpg"
-                  aria-label="放大查看：基于深度学习的海洋温度智能预测与可视化平台">
-            <img src="image/ocean-work-2025.jpg" width="1000" height="806"
-                 alt="《基于深度学习的海洋温度智能预测与可视化平台》作品汇编收录页"
-                 class="work-img" loading="lazy">
-          </button>
+
+          <div class="work-page">
+            <button class="work-shot" type="button"
+                    data-zoom="image/ocean-work-2025-1.jpg"
+                    aria-label="放大查看：基于深度学习的海洋温度智能预测与可视化平台（第 1 页）">
+              <img src="image/ocean-work-2025-1.jpg" width="2200" height="1788"
+                   alt="《基于深度学习的海洋温度智能预测与可视化平台》作品汇编收录页 第 1 页"
+                   class="work-img" loading="lazy">
+            </button>
+            <span class="work-page-label">第 1 页</span>
+          </div>
+
+          <div class="work-page">
+            <button class="work-shot" type="button"
+                    data-zoom="image/ocean-work-2025-2.jpg"
+                    aria-label="放大查看：基于深度学习的海洋温度智能预测与可视化平台（第 2 页）">
+              <img src="image/ocean-work-2025-2.jpg" width="2200" height="1824"
+                   alt="《基于深度学习的海洋温度智能预测与可视化平台》作品汇编收录页 第 2 页"
+                   class="work-img" loading="lazy">
+            </button>
+            <span class="work-page-label">第 2 页</span>
+          </div>
+
           <h4>基于深度学习的海洋温度智能预测与可视化平台</h4>
           <p>第四届全国智慧海洋大数据与人工智能应用创新大赛 优秀奖 · 2025 · 收录于大赛作品汇编</p>
         </article>

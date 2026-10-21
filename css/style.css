@@ -1110,6 +1110,10 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+  /* 2025 那件作品是两页、上下排开，卡片比 2024 那张高一倍。
+     默认的 stretch 会把矮的那张拉到等高，它的图下面就会空出一大块，
+     所以让每张卡片各自按内容定高 */
+  align-items: start;
 }
 
 /* 卡片外壳跟证书卡一模一样，只是里面换成了能点的大图 */
@@ -1131,6 +1135,22 @@ img { max-width: 100%; display: block; }
 
 /* .work-shot 这个按钮壳本身不用再写样式了，
    它和 .cert-shot 共用上面「点击放大的图框」那一组规则 */
+
+/* 一件作品占两页时，每页这么包一层：图上 + 页码。
+   页码必须有——两张缩略图长得几乎一样，不标就分不清哪张在前 */
+.work-page {
+  margin-bottom: 18px;
+}
+/* 覆盖 .work-shot 的 14px：页码紧跟在图下面，14px 太远了 */
+.work-page .work-shot {
+  margin-bottom: 8px;
+}
+.work-page-label {
+  display: block;
+  font-size: .8125rem;
+  color: var(--c-text-3);
+}
+
 .work-img {
   display: block;
   width: 100%;
