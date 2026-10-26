@@ -12,6 +12,20 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.25',
+    title: 'Claude Code中有关MCP的知识点大全',
+    desc:  '因此，防范此类安全风险的责任完全落在用户身上，最佳的安全实践原则是：优先自己编写：关键业务工具尽量自己编写 MCP 服务器。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169066029',
+    tags:  ['ClaudeCode', 'MCP'],
+  },
+  {
+    date:  '2026.10.25',
+    title: 'Claude Code Agent SDK详解',
+    desc:  'ClaudeCodeAgentSDK支持Streaming与Single两种输入模式…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169061960',
+    tags:  ['ClaudeCode', 'MCP'],
+  },
+  {
     date:  '2026.10.18',
     title: 'Channels在ClaudeCode中的作用是啥？与传统轮询式活新建会话式集成的区别是啥？',
     desc:  'Anthropic的ClaudeCode Channels（2026年3月推出）是一项革命性机制…',
@@ -38,20 +52,6 @@ const POSTS = [
     desc:  'MEMORY.md定位为“索引”而非“记忆库”，其加载量受两大约束控制：文件大小与行数限制。当超过200行或25K字符时，触发超限问题，影响模型理解。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/168238699',
     tags:  ['MEMORY.md', 'CLAUDE.md'],
-  },
-  {
-    date:  '2026.10.17',
-    title: 'Agent Loop标准执行循环包括哪些关键阶段？',
-    desc:  '本文提出五阶段智能系统运行框架：①上下文组装，整合多源信息；②模型推理，生成决策逻辑；③工具分发，匹配合适工具；④权限守门，确保操作合规…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168226630',
-    tags:  ['AgentLoop', '上下文组装'],
-  },
-  {
-    date:  '2026.10.17',
-    title: 'Agent SDK默认将哪三类状态写入本地磁盘？',
-    desc:  '采用子进程模式部署，确保多租户隔离安全。SessionStore为镜像而非替代，保障数据一致性。支持四种Session部署方式，灵活适配场景。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168222569',
-    tags:  ['AgentSDK', 'SessionStore'],
   },
 ];
 /* SYNC:END */
