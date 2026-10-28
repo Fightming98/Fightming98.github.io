@@ -12,6 +12,13 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.28',
+    title: 'AI数据服务的下半场核心竞争力',
+    desc:  '沐晨科技（MuchenAI）凭借其从数据交付到体系构建的转型，成为大模型复杂任务落地的关键支撑。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169269327',
+    tags:  ['科技', '人工智能'],
+  },
+  {
     date:  '2026.10.25',
     title: 'Claude Code中有关MCP的知识点大全',
     desc:  '因此，防范此类安全风险的责任完全落在用户身上，最佳的安全实践原则是：优先自己编写：关键业务工具尽量自己编写 MCP 服务器。',
@@ -45,13 +52,6 @@ const POSTS = [
     desc:  'ClaudeCode中内置命令（如 /help、/compact）为本地客户端操作，零Token消耗，用于会话控制…',
     url:   'https://blog.csdn.net/m0_59777389/article/details/168249569',
     tags:  ['内置Skill', '内置命令'],
-  },
-  {
-    date:  '2026.10.17',
-    title: 'Auto Memory(MEMORY.md)在session启动时被加载到上下文',
-    desc:  'MEMORY.md定位为“索引”而非“记忆库”，其加载量受两大约束控制：文件大小与行数限制。当超过200行或25K字符时，触发超限问题，影响模型理解。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168238699',
-    tags:  ['MEMORY.md', 'CLAUDE.md'],
   },
 ];
 /* SYNC:END */
