@@ -21,9 +21,9 @@ const POSTS = [
   {
     date:  '2026.10.25',
     title: 'Claude Code中有关MCP的知识点大全',
-    desc:  '因此，防范此类安全风险的责任完全落在用户身上，最佳的安全实践原则是：优先自己编写：关键业务工具尽量自己编写 MCP 服务器。',
+    desc:  'managed-mcp.json 是企业级系统级托管配置，一旦存在即触发“独占逻辑”，仅加载其中定义的MCP服务器，忽略其他所有配置（如.mcp.json…',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169066029',
-    tags:  ['ClaudeCode', 'MCP'],
+    tags:  ['ClaudeCode', 'ToolSearch'],
   },
   {
     date:  '2026.10.25',
