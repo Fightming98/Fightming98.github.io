@@ -12,6 +12,13 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.29',
+    title: 'ClaudeCode有关Agent Loop知识点大全',
+    desc:  'ClaudeCode的AgentLoop标准执行循环包含五大核心阶段：上下文组装、模型推理、工具分发、权限守门与工具执行，基于ReAct模式实现闭环迭代。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169463118',
+    tags:  ['AgentLoop', 'checkpoint快照'],
+  },
+  {
     date:  '2026.10.28',
     title: 'AI数据服务的下半场核心竞争力',
     desc:  '沐晨科技（MuchenAI）凭借其从数据交付到体系构建的转型，成为大模型复杂任务落地的关键支撑。',
@@ -27,10 +34,10 @@ const POSTS = [
   },
   {
     date:  '2026.10.25',
-    title: 'Claude Code Agent SDK详解',
+    title: 'Claude Code Agent SDK知识点大全',
     desc:  'ClaudeCodeAgentSDK支持Streaming与Single两种输入模式…',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169061960',
-    tags:  ['ClaudeCode', 'MCP'],
+    tags:  ['SessionStore', 'CLAUDE.md'],
   },
   {
     date:  '2026.10.18',
@@ -45,13 +52,6 @@ const POSTS = [
     desc:  'ClaudeCode中的CLAUDE.md与MEMORY.md代表两种截然不同的记忆机制：前者是开发者编写的“项目宪法”，定义规则与标准，固定且共享…',
     url:   'https://blog.csdn.net/m0_59777389/article/details/168249785',
     tags:  ['CLAUDE.md', 'MEMORY.md'],
-  },
-  {
-    date:  '2026.10.17',
-    title: '内置skill（如/code-review、/debug）与内置命令（如/help、/compact）的区别',
-    desc:  'ClaudeCode中内置命令（如 /help、/compact）为本地客户端操作，零Token消耗，用于会话控制…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168249569',
-    tags:  ['内置Skill', '内置命令'],
   },
 ];
 /* SYNC:END */
