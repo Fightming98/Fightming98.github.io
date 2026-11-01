@@ -12,6 +12,27 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.10.31',
+    title: 'ClaudeCode的权限管理与Hook相关知识（强制约束）',
+    desc:  '文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169632447',
+    tags:  ['Hook'],
+  },
+  {
+    date:  '2026.10.31',
+    title: 'ClaudeCode的上下文管理机制知识点大全',
+    desc:  'ClaudeCode通过快照机制（Checkpointing）实现代码状态可逆，结合定向压缩（Summarize/Rewind）精准管理上下文。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169631446',
+    tags:  ['Context', 'checkpoint快照'],
+  },
+  {
+    date:  '2026.10.31',
+    title: 'ClaudeCode有关记忆的全部知识点',
+    desc:  'ClaudeCode的FileCheckpointing通过文件级快照与对话状态绑定，实现修改前的自动备份与精准回滚，支持撤销操作。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169563441',
+    tags:  ['Memory', 'CLAUDE.md'],
+  },
+  {
     date:  '2026.10.29',
     title: 'ClaudeCode有关Agent Loop知识点大全',
     desc:  'ClaudeCode的AgentLoop标准执行循环包含五大核心阶段：上下文组装、模型推理、工具分发、权限守门与工具执行，基于ReAct模式实现闭环迭代。',
@@ -31,27 +52,6 @@ const POSTS = [
     desc:  'managed-mcp.json 是企业级系统级托管配置，一旦存在即触发“独占逻辑”，仅加载其中定义的MCP服务器，忽略其他所有配置（如.mcp.json…',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169066029',
     tags:  ['ClaudeCode', 'ToolSearch'],
-  },
-  {
-    date:  '2026.10.25',
-    title: 'Claude Code Agent SDK知识点大全',
-    desc:  'ClaudeCodeAgentSDK支持Streaming与Single两种输入模式…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/169061960',
-    tags:  ['SessionStore', 'CLAUDE.md'],
-  },
-  {
-    date:  '2026.10.18',
-    title: 'Channels在ClaudeCode中的作用是啥？与传统轮询式活新建会话式集成的区别是啥？',
-    desc:  'Anthropic的ClaudeCode Channels（2026年3月推出）是一项革命性机制…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168251081',
-    tags:  ['Channels', 'MCP'],
-  },
-  {
-    date:  '2026.10.17',
-    title: 'CLAUDE.md文件与MEMORY.md文件，两套记忆机制啥区别？',
-    desc:  'ClaudeCode中的CLAUDE.md与MEMORY.md代表两种截然不同的记忆机制：前者是开发者编写的“项目宪法”，定义规则与标准，固定且共享…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/168249785',
-    tags:  ['CLAUDE.md', 'MEMORY.md'],
   },
 ];
 /* SYNC:END */
