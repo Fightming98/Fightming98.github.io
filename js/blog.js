@@ -12,15 +12,22 @@
 /* SYNC:START */
 const POSTS = [
   {
-    date:  '2026.10.31',
-    title: 'ClaudeCode的权限管理与Hook相关知识（强制约束）',
+    date:  '2026.11.01',
+    title: 'ClaudeCode的Skill组件知识点大全',
     desc:  '文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/169632447',
-    tags:  ['Hook'],
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169748677',
+    tags:  ['ClaudeCode'],
   },
   {
     date:  '2026.10.31',
-    title: 'ClaudeCode的上下文管理机制知识点大全',
+    title: 'ClaudeCode的权限管理+Hook钩子相关知识（强制约束）',
+    desc:  '文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/169632447',
+    tags:  ['ClaudeCode', 'Hooks'],
+  },
+  {
+    date:  '2026.10.31',
+    title: 'ClaudeCode的上下文工程知识点大全',
     desc:  'ClaudeCode通过快照机制（Checkpointing）实现代码状态可逆，结合定向压缩（Summarize/Rewind）精准管理上下文。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169631446',
     tags:  ['Context', 'checkpoint快照'],
@@ -45,13 +52,6 @@ const POSTS = [
     desc:  '沐晨科技（MuchenAI）凭借其从数据交付到体系构建的转型，成为大模型复杂任务落地的关键支撑。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169269327',
     tags:  ['科技', '人工智能'],
-  },
-  {
-    date:  '2026.10.25',
-    title: 'Claude Code中有关MCP的知识点大全',
-    desc:  'managed-mcp.json 是企业级系统级托管配置，一旦存在即触发“独占逻辑”，仅加载其中定义的MCP服务器，忽略其他所有配置（如.mcp.json…',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/169066029',
-    tags:  ['ClaudeCode', 'ToolSearch'],
   },
 ];
 /* SYNC:END */
