@@ -12,6 +12,13 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.11.09',
+    title: '多智能体代码审计系统的技术选型讨论记录',
+    desc:  '本项目旨在构建一个可运行、可测试的多智能体代码审查系统，解决传统人工审查效率低、工具输出不可信等问题。',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/170354956',
+    tags:  ['AIAgent开发', '从0到1'],
+  },
+  {
     date:  '2026.11.01',
     title: 'ClaudeCode的Skill组件知识点大全',
     desc:  '文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本…',
@@ -45,13 +52,6 @@ const POSTS = [
     desc:  'ClaudeCode的AgentLoop标准执行循环包含五大核心阶段：上下文组装、模型推理、工具分发、权限守门与工具执行，基于ReAct模式实现闭环迭代。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169463118',
     tags:  ['AgentLoop', 'checkpoint快照'],
-  },
-  {
-    date:  '2026.10.28',
-    title: 'AI数据服务的下半场核心竞争力',
-    desc:  '沐晨科技（MuchenAI）凭借其从数据交付到体系构建的转型，成为大模型复杂任务落地的关键支撑。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/169269327',
-    tags:  ['科技', '人工智能'],
   },
 ];
 /* SYNC:END */
