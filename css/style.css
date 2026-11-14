@@ -439,13 +439,25 @@ img { max-width: 100%; display: block; }
   padding: 152px 0 100px;      /* 上面留出导航栏的高度 */
 }
 
-/* 左右两栏：左边自适应，右边固定 400px */
+/* 两行网格：第一行是姓名 + 意向岗位，第二行才是左栏正文和右栏卡片。
+   这样卡片顶部跟左边的个人介绍文字平齐，不会顶到姓名那一行去。
+   （早先是一行两栏，右栏跟姓名同顶；想要卡片下移只能写死 margin-top，
+   而标题字号是 clamp() 随视口变的，写多少都不稳，所以改成两行） */
 .about-split {
   display: grid;
   grid-template-columns: 1fr 400px;
-  gap: 64px;
+  /* 第一行只占左栏（右边留空）：让 .hero-role 的三列网格还是原来的宽度，
+     电话和邮箱不会跑到页面最右边去 */
+  grid-template-areas:
+    "intro ."
+    "main  edu";
+  gap: 0 64px;             /* 行间距交给各自的 margin-bottom，这里只管列间距 */
   align-items: start;
 }
+
+.hero-intro { grid-area: intro; }
+.hero-main  { grid-area: main; }
+.hero-right { grid-area: edu; }
 
 .hero-title {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -1590,8 +1602,14 @@ body.no-scroll { overflow: hidden; }
 @media (max-width: 1024px) {
   .about-split {
     grid-template-columns: 1fr;   /* 首屏改成上下排列 */
-    gap: 48px;
+    grid-template-areas:
+      "intro"
+      "main"
+      "edu";
+    gap: 0;
   }
+  /* 上下排列时 grid 没有列间距了，卡片和上面正文之间这 48px 得自己补 */
+  .hero-right { margin-top: 48px; }
   .section { padding: 96px 0; }
   .hero { padding: 136px 0 80px; }
 }

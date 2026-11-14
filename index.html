@@ -71,8 +71,10 @@
     <div class="container">
       <div class="about-split">
 
-        <!-- ---------- 左栏：自我介绍 ---------- -->
-        <div>
+        <!-- ---------- 第一行：姓名 + 意向岗位（横跨整宽） ---------- -->
+        <!-- 单独拆出来是为了让右边教育卡片从下一行起步，
+             卡片顶部才能跟左边的个人介绍文字对齐，而不是顶到姓名上 -->
+        <div class="hero-intro">
           <h1 class="hero-title">王明豪</h1>
 
           <!-- 三列网格，按顺序自动落位：标签 ｜ 内容 ｜ 联系方式。
@@ -93,7 +95,10 @@
             <span>大连 / 郑州</span>
             <a class="hero-role-contact" href="mailto:2103186926@qq.com">邮箱：2103186926@qq.com</a>
           </div>
+        </div>
 
+        <!-- ---------- 第二行左栏：照片 + 自我介绍 ---------- -->
+        <div class="hero-main">
           <div class="hero-photo-row">
             <!-- TODO: 放一张竖版个人照到 image/photo.jpg（建议 480×600） -->
             <!-- 这张不接点击放大：它是首屏的一张肖像，不是需要看清细节的凭证 -->
@@ -113,7 +118,7 @@
               <!-- 三条按序号排列：每条一个主题，扫读时一行一个落点。
                    原来是一整段，按分号拆开，文字本身没动 -->
               <ol class="bio-list">
-                <li>熟悉 Java、Python 语言与 PyTorch、FastAPI、LangChain 框架及 Spark 大数据技术，精通机器学习算法与 RNN、CNN、GCN、Transformer 等深度学习模型，具备 PyTorch 模型训练调优与 FastAPI 安全工程化部署能力；</li>
+                <li>熟悉 Java、Python 语言与 PyTorch、FastAPI、LangChain 框架及 Spark 大数据技术，精通机器学习算法与 Transformer、RNN、CNN、GNN 等深度学习模型，具备 PyTorch 模型训练调优与 FastAPI 安全工程化部署能力；</li>
                 <li>具备 AI 大模型应用与工程落地能力，独立开发过法律领域本地化 RAG 智能问答系统与多智能体协作代码审查系统，深入理解 ReAct、Reflexion、Agentic Loop、Memory、Function Calling、MCP 等 Harness 核心组件与 A2A、多 Agent 协作原理及复杂任务拆解能力；</li>
                 <li>熟悉 Claude Code 工程架构设计，Memory、Hooks、Skills 等核心机制与 Prompt 工程、Context 工程能力。</li>
               </ol>
