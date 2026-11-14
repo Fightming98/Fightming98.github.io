@@ -100,7 +100,7 @@
             <img src="image/photo.jpg" alt="王明豪" class="hero-photo" width="180" height="225" decoding="async">
 
             <div class="hero-bio">
-              <!-- 这三段在源文件里不换行：HTML 会把段落内的换行折成空格，
+              <!-- 这几处在源文件里不换行：HTML 会把段落内的换行折成空格，
                    中文句子中间凭空多出一个空格（「智慧海洋 预测预警」）。
                    段落内部的折行只在这个空格看不出来的地方才允许 -->
               <p>
@@ -109,9 +109,15 @@
               <!-- <p>
                 在校期间担任大学班长与党支部学生负责人，荣获华为云鲲鹏技能认证，多次获得国家励志奖学金，学业奖学金，三好学生，五好学生，优秀班干，优秀团干，辩论赛一等奖，市级优秀志愿者和疫情优秀工作者等 10 余项荣誉称号。
               </p> -->
-              <p>
-                特长：熟悉 Python 语言与 PyTorch、FastAPI、LangChain 框架及 Spark 大数据技术，精通机器学习算法与 CNN、GCN、Transformer 等深度学习模型，具备 PyTorch 模型训练调优与 FastAPI 安全工程化部署能力；具备 AI 大模型应用与工程落地能力，独立开发过法律领域本地化 RAG 智能问答系统与多智能体协作代码审查系统；深入理解 ReAct、Reflexion、Agentic Loop、Memory、Function Calling、MCP 等 Harness 核心组件与 A2A、多 Agent 协作原理及复杂任务拆解能力；熟悉 Claude Code 工程架构设计，Memory、Hooks、Skills 等核心机制与 Prompt 工程、Context 工程能力。
-              </p>
+              <p class="bio-label">特长：</p>
+              <!-- 四个分号拆成四条：每条一个主题，扫读时一行一个落点。
+                   文字本身没动，只是把原来的一段拆开 -->
+              <ul class="bio-list">
+                <li>熟悉 Python 语言与 PyTorch、FastAPI、LangChain 框架及 Spark 大数据技术，精通机器学习算法与 CNN、GCN、Transformer 等深度学习模型，具备 PyTorch 模型训练调优与 FastAPI 安全工程化部署能力；</li>
+                <li>具备 AI 大模型应用与工程落地能力，独立开发过法律领域本地化 RAG 智能问答系统与多智能体协作代码审查系统；</li>
+                <li>深入理解 ReAct、Reflexion、Agentic Loop、Memory、Function Calling、MCP 等 Harness 核心组件与 A2A、多 Agent 协作原理及复杂任务拆解能力；</li>
+                <li>熟悉 Claude Code 工程架构设计，Memory、Hooks、Skills 等核心机制与 Prompt 工程、Context 工程能力。</li>
+              </ul>
             </div>
           </div>
 

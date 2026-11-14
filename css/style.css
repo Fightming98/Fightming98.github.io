@@ -514,6 +514,39 @@ img { max-width: 100%; display: block; }
   color: var(--c-text-2);
 }
 
+/* 「特长」的四条：原来是一整段 13 行，扫读找不到落点，拆成一条一行。
+   .hero-bio 里的 p 不带 margin，所以段距得自己补 */
+.hero-bio .bio-label { margin-top: 10px; }
+
+.bio-list {
+  list-style: none;          /* 换成下面那个小圆点，浏览器自带的圆点太大、位置也不对 */
+  margin: 6px 0 0;
+  padding: 0;
+}
+
+.bio-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--c-text-2);
+}
+
+/* 小圆点在第一条基线略上的位置：top 用 em 跟着行高走，改字号时自动跟着变 */
+.bio-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: .72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  opacity: .55;
+}
+
+.bio-list li + li { margin-top: 6px; }
+
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ---------- 右栏：学历卡片 ---------- */
