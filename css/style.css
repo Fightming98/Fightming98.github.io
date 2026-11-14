@@ -514,36 +514,25 @@ img { max-width: 100%; display: block; }
   color: var(--c-text-2);
 }
 
-/* 「特长」的四条：原来是一整段 13 行，扫读找不到落点，拆成一条一行。
+/* 「特长」的三条：原来是一整段 13 行，扫读找不到落点，拆成带序号的一条一行。
    .hero-bio 里的 p 不带 margin，所以段距得自己补 */
 .hero-bio .bio-label { margin-top: 10px; }
 
 .bio-list {
-  list-style: none;          /* 换成下面那个小圆点，浏览器自带的圆点太大、位置也不对 */
   margin: 6px 0 0;
-  padding: 0;
+  /* 1.5em 刚好够「1.」加一个空格：换行时第二行的正文和第一行正文对齐，
+     不会缩到序号底下。浏览器默认的 40px 在窄栏里太宽 */
+  padding-left: 1.5em;
 }
 
 .bio-list li {
-  position: relative;
-  padding-left: 18px;
   font-size: 1rem;
   line-height: 1.8;
   color: var(--c-text-2);
 }
 
-/* 小圆点在第一条基线略上的位置：top 用 em 跟着行高走，改字号时自动跟着变 */
-.bio-list li::before {
-  content: "";
-  position: absolute;
-  left: 2px;
-  top: .72em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--c-accent);
-  opacity: .55;
-}
+/* 序号比正文淡一点，不跟内容抢眼 */
+.bio-list li::marker { color: var(--c-text-3); }
 
 .bio-list li + li { margin-top: 6px; }
 
