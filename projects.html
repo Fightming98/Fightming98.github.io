@@ -27,6 +27,12 @@
       margin-bottom: 16px;
     }
 
+    /* 副标题那句和上面贴在一行会挤成一块：.section-desc 全局没有 margin，
+       这里只在详情页页头补一点段距 */
+    /* 这句话正好卡在换行边缘，末行会剩「实践。」两个字孤零零吊着；
+       balance 让两行分匀，不支持的浏览器退回普通换行，不影响可读性 */
+    .detail-hero .section-desc + .section-desc { margin-top: 10px; text-wrap: balance; }
+
     .back-link {
       display: inline-flex;
       align-items: center;
@@ -237,6 +243,9 @@
       <h1>项目详情</h1>
       <p class="section-desc">
         七个核心项目的完整说明：技术方案、我承担的工作，以及量化后的实际产出。
+      </p>
+      <p class="section-desc">
+        覆盖代码智能、法律智能、数据安全、海洋预测、智慧养殖、电商与教育等多个领域的 AI 工程化落地实践。
       </p>
     </div>
   </header>
