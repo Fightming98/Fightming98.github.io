@@ -12,6 +12,13 @@
 /* SYNC:START */
 const POSTS = [
   {
+    date:  '2026.11.14',
+    title: 'Claude Code 面试高频核心考点图谱',
+    desc:  'ClaudeCode核心架构由六大模块构成：AgentLoop实现任务驱动的推理-工具调用-验证闭环；代码检索优先使用Glob/Grep等原生工具…',
+    url:   'https://blog.csdn.net/m0_59777389/article/details/170778296',
+    tags:  ['ClaudeCode', 'Harness'],
+  },
+  {
     date:  '2026.11.09',
     title: '多智能体代码审计系统的技术选型讨论记录',
     desc:  '本项目旨在构建一个可运行、可测试的多智能体代码审查系统，解决传统人工审查效率低、工具输出不可信等问题。',
@@ -21,9 +28,9 @@ const POSTS = [
   {
     date:  '2026.11.01',
     title: 'ClaudeCode的Skill组件知识点大全',
-    desc:  '文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本…',
+    desc:  'Agent在多Skill场景中通过语义理解与上下文匹配精准调用最优技能；CC决策依赖intent与context字段…',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169748677',
-    tags:  ['ClaudeCode'],
+    tags:  ['ClaudeCode', 'Skills'],
   },
   {
     date:  '2026.10.31',
@@ -45,13 +52,6 @@ const POSTS = [
     desc:  'ClaudeCode的FileCheckpointing通过文件级快照与对话状态绑定，实现修改前的自动备份与精准回滚，支持撤销操作。',
     url:   'https://blog.csdn.net/m0_59777389/article/details/169563441',
     tags:  ['Memory', 'CLAUDE.md'],
-  },
-  {
-    date:  '2026.10.29',
-    title: 'ClaudeCode有关Agent Loop知识点大全',
-    desc:  'ClaudeCode的AgentLoop标准执行循环包含五大核心阶段：上下文组装、模型推理、工具分发、权限守门与工具执行，基于ReAct模式实现闭环迭代。',
-    url:   'https://blog.csdn.net/m0_59777389/article/details/169463118',
-    tags:  ['AgentLoop', 'checkpoint快照'],
   },
 ];
 /* SYNC:END */
